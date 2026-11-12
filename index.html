@@ -44,53 +44,40 @@
         </div>
       </div>
 
-      <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column">
-        <div style="position: relative; background: #FFFFFF; color: #0B0B3D; border-radius: 14px; box-shadow: 0 30px 60px rgba(0,0,0,.35); overflow: hidden">
-          <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #EFF1FA; border-bottom: 1px solid #DCDFEA">
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #FF7B69"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #EECF4F"></span>
-            <span style="width: 10px; height: 10px; border-radius: 50%; background: #00B592"></span>
-            <span style="margin-left: 10px; flex: 1; background: #FFFFFF; border: 1px solid #DCDFEA; border-radius: 6px; padding: 4px 10px; font-size: 12px; color: #55576A">yourstore.com/order/confirmed</span>
+      <div style="flex: 1 1 500px; min-width: 0">
+        <div class="hwin" aria-hidden="true">
+          <div class="hbar">
+            <span style="background: #FF7B69"></span><span style="background: #EECF4F"></span><span style="background: #00B592"></span>
+            <em>yourstore.com/order/confirmed</em>
           </div>
-          <div style="position: relative; padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 12px">
-            <div aria-hidden="true" class="gl-anim" style="position: absolute; left: 0; right: 0; top: 0; height: 3px; background: #3793FF; box-shadow: 0 0 18px 6px rgba(55,147,255,.45); animation: gl-scan 9s linear infinite"></div>
-            <div style="font-weight: 700; font-size: 17px">Thanks, your order is confirmed.</div>
-            <div style="height: 8px; width: 62%; border-radius: 4px; background: #EFF1FA"></div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #EFF1FA; padding-top: 12px"><span style="display: block; height: 8px; width: 46%; border-radius: 4px; background: #E3E6F0"></span><span style="display: block; height: 8px; width: 14%; border-radius: 4px; background: #E3E6F0"></span></div>
-            <div style="display: flex; justify-content: space-between; align-items: center"><span style="display: block; height: 8px; width: 38%; border-radius: 4px; background: #E3E6F0"></span><span style="display: block; height: 8px; width: 12%; border-radius: 4px; background: #E3E6F0"></span></div>
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700"><span>Order total</span><span style="display: block; height: 8px; width: 16%; border-radius: 4px; background: #C9CDDD"></span></div>
-            <div class="gl-anim" style="border: 2px dashed #00B592; border-radius: 10px; padding: 12px 14px; background: #F3FCF0; display: flex; align-items: center; gap: 10px; animation: gl-glow 3s ease-in-out infinite">
-              <span class="gl-anim" style="width: 10px; height: 10px; border-radius: 50%; background: #00B592; animation: gl-pulse 2s ease-out infinite"></span>
-              <span style="font-size: 13px; font-weight: 600; color: #007F67">A thank-you offer shows here</span>
+          <div class="hbody">
+            <div class="hpage">
+              <div class="gl-anim hscan"></div>
+              <div class="hthanks">Thanks, your order is confirmed.</div>
+              <div class="hline"><i style="width: 58%"></i><i style="width: 16%"></i></div>
+              <div class="hline"><i style="width: 44%"></i><i style="width: 14%"></i></div>
+              <div class="hline htotal"><b>Order total</b><i style="width: 18%"></i></div>
+              <div class="gl-anim hoffer"><span class="gl-anim hdot"></span>A thank-you offer shows here</div>
+            </div>
+            <div class="hpanel">
+              <div class="hagent"><span class="havatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"></rect><path d="M12 8V4"></path><circle cx="9.5" cy="13" r="1.1"></circle><circle cx="14.5" cy="13" r="1.1"></circle></svg></span><span><b>AI agent</b><small>Checking this page</small></span></div>
+              <ul class="hlist"><li class="hrow"><span class="hico"><span class="gl-anim gl-wait" style="animation: gl-out1 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="opacity: 0; animation: gl-in1 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt1 9s ease-out infinite">Offer spot is on the page</span></li><li class="hrow"><span class="hico"><span class="gl-anim gl-wait" style="animation: gl-out2 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="opacity: 0; animation: gl-in2 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt2 9s ease-out infinite">Order details are complete</span></li><li class="hrow"><span class="hico"><span class="gl-anim gl-wait" style="animation: gl-out3 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="opacity: 0; animation: gl-in3 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt3 9s ease-out infinite">Shopper email is protected</span></li><li class="hrow"><span class="hico"><span class="gl-anim gl-wait" style="animation: gl-out4 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="opacity: 0; animation: gl-in4 9s ease-out infinite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6"></path><path d="M12 16.5v.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt4 9s ease-out infinite">Sales go to the right account</span></li></ul>
+              <div class="hverdict">
+                <span class="gl-anim gl-wait hchip hwait" style="animation: gl-out5 9s ease-out infinite">Checking...</span>
+                <span class="gl-anim hchip hbad" style="opacity: 0; animation: gl-in5 9s ease-out infinite">Not ready: 1 thing to fix</span>
+              </div>
             </div>
           </div>
         </div>
-
-        <svg width="100%" height="34" viewBox="0 0 400 34" preserveAspectRatio="none" aria-hidden="true" style="display: block">
-          <path class="gl-anim" d="M300 0 C300 18, 300 18, 300 34" stroke="#EEF9AF" stroke-width="2" fill="none" stroke-dasharray="4 8" style="animation: gl-flow 1s linear infinite"></path>
-        </svg>
-
-        <div style="align-self: flex-end; width: min(330px, 100%); background: #FFFFFF; color: #0B0B3D; border-radius: 14px; padding: 16px 18px; box-shadow: 0 24px 48px rgba(0,0,0,.35); display: flex; flex-direction: column; gap: 4px">
-          <div style="display: flex; justify-content: space-between; align-items: center">
-            <span style="font-size: 13px; font-weight: 700">AI agent check</span>
-            <span style="font-size: 12px; color: #55576A">New partner</span>
-          </div>
-          <ul style="list-style: none; margin: 4px 0 0; padding: 0">
-            <li style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0"><span style="position: relative; width: 20px; height: 20px; flex: none"><span class="gl-anim gl-wait" style="position: absolute; inset: 0; animation: gl-out1 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="position: absolute; inset: 0; opacity: 0; animation: gl-in1 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt1 9s ease-out infinite">Offer code is on the page</span></li>
-            <li style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0"><span style="position: relative; width: 20px; height: 20px; flex: none"><span class="gl-anim gl-wait" style="position: absolute; inset: 0; animation: gl-out2 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="position: absolute; inset: 0; opacity: 0; animation: gl-in2 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt2 9s ease-out infinite">Order details are complete</span></li>
-            <li style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0"><span style="position: relative; width: 20px; height: 20px; flex: none"><span class="gl-anim gl-wait" style="position: absolute; inset: 0; animation: gl-out3 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="position: absolute; inset: 0; opacity: 0; animation: gl-in3 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt3 9s ease-out infinite">Shopper email is protected</span></li>
-            <li style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0"><span style="position: relative; width: 20px; height: 20px; flex: none"><span class="gl-anim gl-wait" style="position: absolute; inset: 0; animation: gl-out4 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C3C6D4" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle></svg></span><span class="gl-anim" style="position: absolute; inset: 0; opacity: 0; animation: gl-in4 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6"></path><path d="M12 16.5v.5"></path></svg></span></span><span class="gl-anim" style="color: #9A9CAA; animation: gl-txt4 9s ease-out infinite">Sales go to the right account</span></li>
-            </ul>
-          <div style="position: relative; margin-top: 6px; height: 30px"><span class="gl-anim gl-wait" style="position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; background: #EFF1FA; color: #55576A; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; animation: gl-out5 9s ease-out infinite">Checking...</span><span class="gl-anim" style="position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; background: #FFEAF1; color: #A3134F; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; opacity: 0; animation: gl-in5 9s ease-out infinite">Not ready: 1 thing to fix</span></div>
-        </div>
       </div>
+
     </div>
   <div style="position: relative; max-width: 1120px; margin: 0 auto; padding: 0 24px 64px">
     <div class="flow" role="img" aria-label="How it works: the AI agent reads the partner's checkout page and sends the partner team a plain answer and the fix, before launch and every few hours after.">
       <div class="fnode"><div class="fico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#EEF9AF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg></div><div><b>Partner's checkout page</b><span>Where offers show after a purchase</span></div></div>
       <div class="flink" aria-hidden="true"><span class="flabel">reads the page</span><span class="ftrack"><i></i></span></div>
       <div class="fnode"><div class="fico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#EEF9AF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"></rect><path d="M12 8V4"></path><circle cx="12" cy="3.5" r="1"></circle><circle cx="9.5" cy="13" r="1.2"></circle><circle cx="14.5" cy="13" r="1.2"></circle><path d="M9.5 16.5h5"></path></svg></div><div><b>AI agent</b><span>Checks it the way a person would</span></div></div>
-      <div class="flink" aria-hidden="true"><span class="flabel">sends the answer and the fix</span><span class="ftrack"><i></i></span></div>
+      <div class="flink" aria-hidden="true"><span class="flabel">sends the fix</span><span class="ftrack"><i></i></span></div>
       <div class="fnode"><div class="fico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#EEF9AF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><path d="M3.5 19c.6-3 2.8-5 5.5-5s4.9 2 5.5 5"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2c2.3.2 4.1 1.9 4.6 4.8"></path></svg></div><div><b>Partner team</b><span>Ready or not, and what to send the partner</span></div></div>
     </div>
     <p class="fnote">Before launch, and every few hours after.</p>
@@ -133,7 +120,7 @@
             <svg class="paths" viewBox="0 0 260 140" preserveAspectRatio="none"><path d="M70 70 C120 70, 140 30, 182 30" stroke="#C9CDDD" stroke-width="2" fill="none" stroke-dasharray="4 6"></path><path d="M70 70 C120 70, 140 110, 182 110" stroke="#EF2678" stroke-width="2" fill="none" stroke-dasharray="4 6" class="flowpath"></path></svg>
             <div class="coin">$</div>
           </div>
-          <h3>Sales go to the wrong account</h3>
+          <h3>Sales go to the right account</h3>
           <p>The page sends a test account ID, so the partner isn't paid.</p>
         </div>
         <div class="pcardx reveal">
