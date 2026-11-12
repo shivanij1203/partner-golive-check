@@ -7,6 +7,7 @@
 <meta name="description" content="Check a new partner's order confirmation page before offers go live. A concept for Fluent's partner team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -36,7 +37,7 @@
         <p style="margin: 0; font-size: 19px; line-height: 1.55; color: #D9DCF3">An AI agent checks the partner's order confirmation page and tells you, in plain words, what has to be fixed and who should fix it.</p>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding-top: 6px">
           <a href="check.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; background: #292EB1; color: #FFFFFF; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; background: #FFFFFF; color: #292EB1">Try it on an example page</a>
-          <span style="font-size: 14px; color: #D9DCF3">About 30 seconds per page</span>
+          <span style="font-size: 14px; color: #D9DCF3">Usually under a minute per page</span>
         </div>
       </div>
 
@@ -75,7 +76,7 @@
             <li class="gl-anim" style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0; opacity: 0; animation: gl-in1 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg><span>Offer code is on the page</span></li>
             <li class="gl-anim" style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0; opacity: 0; animation: gl-in2 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg><span>Order details are complete</span></li>
             <li class="gl-anim" style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0; opacity: 0; animation: gl-in3 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg><span>Shopper email is protected</span></li>
-            <li class="gl-anim" style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0; opacity: 0; animation: gl-in4 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6"></path><path d="M12 16.5v.5"></path></svg><span>Test sale went to the wrong account</span></li>
+            <li class="gl-anim" style="display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 7px 0; opacity: 0; animation: gl-in4 9s ease-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v6"></path><path d="M12 16.5v.5"></path></svg><span>Sales would go to the wrong account</span></li>
           </ul>
           <div class="gl-anim" style="margin-top: 6px; display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; background: #FFEAF1; color: #A3134F; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; opacity: 0; animation: gl-in5 9s ease-out infinite">Not ready: 1 thing to fix</div>
         </div>
@@ -127,7 +128,7 @@
       <div class="how">
         <ol class="hsteps">
           <li><button type="button" class="hstep on" data-step="0"><span class="num">1</span><span><b>Pick a page</b><small>Choose a new partner's order confirmation page, or try an example.</small></span><i class="prog"></i></button></li>
-          <li><button type="button" class="hstep" data-step="1"><span class="num">2</span><span><b>The AI agent checks it</b><small>It does what a person would: finds the offer spot, reads the order details, tries a test sale.</small></span><i class="prog"></i></button></li>
+          <li><button type="button" class="hstep" data-step="1"><span class="num">2</span><span><b>The AI agent checks it</b><small>It does what a person would: finds the offer spot, reads the order details, checks who would get paid.</small></span><i class="prog"></i></button></li>
           <li><button type="button" class="hstep" data-step="2"><span class="num">3</span><span><b>You get a clear answer</b><small>Ready or not ready, what to fix, and a message for the partner's developer.</small></span><i class="prog"></i></button></li>
         </ol>
         <div class="screen" aria-hidden="true">
@@ -140,10 +141,10 @@
           </div>
           <div class="scene" data-scene="1">
             <div class="spage"><div class="sscan"></div><div class="bar w70"></div><div class="bar w45"></div><div class="bar w55"></div><div class="bar w30"></div></div>
-            <ul class="sticks"><li>Found the offer code</li><li>Read the order details</li><li class="x">Test sale went to the wrong account</li></ul>
+            <ul class="sticks"><li>Found the offer code</li><li>Read the order details</li><li class="x">Sales would go to the wrong account</li></ul>
           </div>
           <div class="scene" data-scene="2">
-            <div class="sverdict">Not ready yet<small>2 things to fix before launch</small></div>
+            <div class="sverdict">Not ready yet<small>1 thing to fix before launch</small></div>
             <div class="smsg"><div class="bar w70"></div><div class="bar w55"></div><div class="bar w45"></div><span>Copy message</span></div>
           </div>
         </div>
