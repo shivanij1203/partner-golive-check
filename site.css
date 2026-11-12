@@ -114,3 +114,30 @@ th{font-size:12px;color:#55576A;font-weight:600}
 .pcard .tag.bad{background:#FFEAF1;color:#A3134F}
 .pcard b{font-size:16px !important;line-height:1.35}
 .pcard span{font-size:14px !important;line-height:1.45}
+
+/* ---------- wayfinding ---------- */
+.journey{background:#FFFFFF;border-bottom:1px solid #DCDFEA}
+.journey-in{max-width:960px;margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.jstep{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#55576A;font-size:14px;font-weight:500;padding:6px 12px 6px 6px;border-radius:999px;min-height:40px}
+.jstep:hover{background:#EFF1FA;color:#0B0B3D}
+.jnum{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:#EFF1FA;color:#292EB1}
+.jstep.on{background:#292EB1;color:#FFFFFF;font-weight:600}
+.jstep.on .jnum{background:#FFFFFF;color:#292EB1}
+.jstep.done .jnum{background:#EEF9AF;color:#007F67}
+.jline{width:28px;height:2px;background:#DCDFEA}
+.jextra{margin-left:auto;font-size:12px;font-weight:700;color:#55576A;background:#EFF1FA;border-radius:999px;padding:4px 10px}
+.nextstep{background:#0B0B3D;color:#FFFFFF;border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.nextstep .nlabel{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#EEF9AF}
+.nextstep h2{margin:6px 0 6px;font-size:24px;color:#FFFFFF}
+.nextstep p{margin:0;font-size:15px;line-height:1.55;color:#D9DCF3;max-width:560px}
+.nactions{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.nextstep .btn{background:#FFFFFF;color:#292EB1}
+.nextstep .btn:hover{background:#EEF9AF;color:#0B0B3D}
+.nalt{color:#D9DCF3;font-size:14px}
+.nalt:hover{color:#FFFFFF}
+@media (max-width:600px){.jline{width:12px}.jstep span:last-child{font-size:13px}}
+.btn{gap:8px}
+@media (max-width:600px){
+  nav[aria-label="Main"] > a:nth-of-type(-n+3), nav[aria-label="Main"] > span{display:none}
+  .journey-in{padding:10px 16px}
+}

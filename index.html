@@ -10,19 +10,20 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body data-page="home">
 
 <div style="font-family: Inter, system-ui, sans-serif; color: #0B0B3D; background: #EFF1FA; min-height: 100vh">
   <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner onboarding. Not affiliated with Fluent. The example pages are made up.</div>
   <header style="background: #FFFFFF; border-bottom: 1px solid #DCDFEA">
     <div style="max-width: 960px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
       <a href="index.html" style="font-weight: 800; font-size: 16px; color: #0B0B3D; text-decoration: none">Partner go-live check</a>
-      <nav style="display: flex; flex-wrap: wrap; gap: 22px; font-size: 14px">
-        <a href="index.html" style="color: #0B0B3D; font-weight: 600; text-decoration: none" aria-current="page">How it works</a>
-        <a href="check.html" style="color: #55576A; font-weight: 500; text-decoration: none">Check a partner</a>
-        <a href="health.html" style="color: #55576A; font-weight: 500; text-decoration: none">Partner health</a>
-        <a href="works.html" style="color: #55576A; font-weight: 500; text-decoration: none">Does it work?</a>
-        <a href="engineers.html" style="color: #55576A; font-weight: 500; text-decoration: none">For engineers</a>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px">
+        <a href="index.html" aria-current="page" style="color: #0B0B3D; font-weight: 600; font-size: 14px; text-decoration: none; padding: 4px 0; border-bottom: 2px solid #292EB1;">How it works</a>
+        <a href="check.html" style="color: #55576A; font-weight: 500; font-size: 14px; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent;">Check a partner</a>
+        <a href="health.html" style="color: #55576A; font-weight: 500; font-size: 14px; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent;">Partner health</a>
+        <span aria-hidden="true" style="width: 1px; height: 18px; background: #DCDFEA"></span>
+        <a href="works.html" style="color: #55576A; font-weight: 500; font-size: 13px; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent;">Does it work?</a>
+        <a href="engineers.html" style="color: #55576A; font-weight: 500; font-size: 13px; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent;">For engineers</a>
       </nav>
     </div>
   </header>
@@ -37,8 +38,9 @@
         <h1 style="margin: 0; font-size: 48px; line-height: 1.1; letter-spacing: -0.02em">Know a new partner is ready before their offers go live.</h1>
         <p style="margin: 0; font-size: 19px; line-height: 1.55; color: #D9DCF3">An AI agent checks the partner's order confirmation page and tells you, in plain words, what has to be fixed and who should fix it.</p>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding-top: 6px">
-          <a href="check.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; background: #292EB1; color: #FFFFFF; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; background: #FFFFFF; color: #292EB1">Try it on an example page</a>
-          <span style="font-size: 14px; color: #D9DCF3">Usually under a minute per page</span>
+          <a href="check.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; background: #292EB1; color: #FFFFFF; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; background: #FFFFFF; color: #292EB1; gap: 8px">Check a partner <span aria-hidden="true">&rarr;</span></a>
+          <a href="health.html" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 22px; border: 1px solid rgba(255,255,255,.5); color: #FFFFFF; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none">See partner health</a>
+          
         </div>
       </div>
 
@@ -150,6 +152,7 @@
           </div>
         </div>
       </div>
+          <div><a href="check.html" class="btn">Try it yourself <span aria-hidden="true">&rarr;</span></a></div>
     </section>
 
     <section class="card reveal" style="padding: 32px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
@@ -172,5 +175,6 @@
   <footer style="max-width: 960px; margin: 0 auto; padding: 0 24px 40px; font-size: 13px; color: #55576A">Built by Shivani Jagannatham as sample work for the Software Engineer (AI Agents) role.</footer>
 </div>
 <script src="home.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>
