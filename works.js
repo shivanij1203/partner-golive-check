@@ -17,9 +17,9 @@
       caught += r.score.hits.length;
       r.score.false_alarms.forEach(function (c) { if (c === "ORDER_DATA_UNVERIFIED") unsure++; else wrong++; });
     });
-    var s = caught === expected ? "Caught every problem" : "Caught " + caught + " of " + expected;
-    if (unsure) s += ", sent the rest to a person";
-    if (wrong) s += ", plus " + wrong + " false " + (wrong === 1 ? "alarm" : "alarms");
+    var s = caught === expected ? "Caught every problem" : caught === 0 ? "Missed the problems" : "Caught some problems";
+    if (unsure) s += ", and sent the pages it couldn't read to a person";
+    if (wrong) s += ", with some false alarms";
     return s;
   }
 
@@ -52,7 +52,7 @@
   function render(d) {
     var rules = d.rules, agent = d.agent;
     if (!rules) {
-      $("compare").innerHTML = '<p style="margin:0;color:#55576A">Running the test on all 13 pages. This takes a few seconds.</p>';
+      $("compare").innerHTML = '<p style="margin:0;color:#55576A">Running the test. This takes a few seconds.</p>';
       setTimeout(load, 2000);
       return;
     }
@@ -60,8 +60,8 @@
       return res ? res.pages.filter(function (p) { return (p.setup === "documented") === std; }) : null;
     };
     $("compare").innerHTML =
-      group("Pages set up the standard way", "6 pages, set up the way the integration guide says", say(split(rules, true)), say(split(agent, true))) +
-      group("Pages set up their own way", "7 pages, the way real developers often do it", say(split(rules, false)), say(split(agent, false)));
+      group("Pages set up the standard way", "Set up the way the integration guide says", say(split(rules, true)), say(split(agent, true))) +
+      group("Pages set up their own way", "Set up the way real developers often do it", say(split(rules, false)), say(split(agent, false)));
 
     var byAgent = {};
     (agent ? agent.pages : []).forEach(function (p) { byAgent[p.slug] = p; });
