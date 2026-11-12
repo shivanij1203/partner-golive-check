@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does it work? | Partner go-live check</title>
+<meta name="description" content="Check a new partner's order confirmation page before offers go live. A concept for Fluent's partner team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #0B0B3D; background: #EFF1FA; min-height: 100vh">
+  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner onboarding. Not affiliated with Fluent. The example pages are made up.</div>
+  <header style="background: #FFFFFF; border-bottom: 1px solid #DCDFEA">
+    <div style="max-width: 960px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+      <a href="index.html" style="font-weight: 800; font-size: 16px; color: #0B0B3D; text-decoration: none">Partner go-live check</a>
+      <nav style="display: flex; flex-wrap: wrap; gap: 22px; font-size: 14px">
+        <a href="index.html" style="color: #55576A; font-weight: 500; text-decoration: none">How it works</a>
+        <a href="check.html" style="color: #55576A; font-weight: 500; text-decoration: none">Check a partner</a>
+        <a href="works.html" style="color: #0B0B3D; font-weight: 600; text-decoration: none" aria-current="page">Does it work?</a>
+      </nav>
+    </div>
+  </header>  <main style="max-width: 960px; margin: 0 auto; padding: 56px 24px 56px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Does it catch the problems?</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 700px">I tested it on 13 example checkout pages where I already knew every problem. Partners set up their pages in different ways, so the test covers both.</p>
+    </div>
+    <div id="compare" style="display: flex; flex-direction: column; gap: 16px"><p style="margin:0;color:#55576A">Loading results...</p></div>
+    <section style="background: #EEF9AF; border-radius: 16px; padding: 24px 28px">
+      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #0B0B3D"><b>It never says "ready" when it isn't sure.</b> If a page can't be read with confidence, the answer is "not ready" and a person takes a look.</p>
+    </section>
+    <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #55576A; max-width: 720px">I built the example pages myself, so this shows the checker works as designed. The next step would be testing it on real partner pages.</p>
+    <div id="admin" class="hidden card" style="padding: 18px 22px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+      <span style="font-size: 14px; color: #55576A">Run the test again:</span>
+      <button id="runrules" class="btn btn-ghost" type="button">Simple rules</button>
+      <button id="runagent" class="btn btn-ghost" type="button">AI agent (needs the access code)</button>
+      <span id="runmsg" style="font-size: 14px; color: #55576A"></span>
+    </div>
+    <details class="card" style="padding: 18px 22px">
+      <summary>See every page</summary>
+      <div style="overflow-x: auto; margin-top: 14px"><table id="pages"></table></div>
+    </details>
+  </main>
+
+
+  <footer style="max-width: 960px; margin: 0 auto; padding: 0 24px 40px; font-size: 13px; color: #55576A">Built by Shivani Jagannatham as sample work for the Software Engineer (AI Agents) role.</footer>
+</div>
+<script src="config.js"></script>
+<script src="works.js"></script>
+</body>
+</html>

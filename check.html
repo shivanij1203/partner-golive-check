@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check a partner | Partner go-live check</title>
+<meta name="description" content="Check a new partner's order confirmation page before offers go live. A concept for Fluent's partner team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #0B0B3D; background: #EFF1FA; min-height: 100vh">
+  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner onboarding. Not affiliated with Fluent. The example pages are made up.</div>
+  <header style="background: #FFFFFF; border-bottom: 1px solid #DCDFEA">
+    <div style="max-width: 960px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+      <a href="index.html" style="font-weight: 800; font-size: 16px; color: #0B0B3D; text-decoration: none">Partner go-live check</a>
+      <nav style="display: flex; flex-wrap: wrap; gap: 22px; font-size: 14px">
+        <a href="index.html" style="color: #55576A; font-weight: 500; text-decoration: none">How it works</a>
+        <a href="check.html" style="color: #0B0B3D; font-weight: 600; text-decoration: none" aria-current="page">Check a partner</a>
+        <a href="works.html" style="color: #55576A; font-weight: 500; text-decoration: none">Does it work?</a>
+      </nav>
+    </div>
+  </header>  <main style="max-width: 960px; margin: 0 auto; padding: 56px 24px 56px; display: flex; flex-direction: column; gap: 28px">
+    <!-- 1. pick -->
+    <section id="pick" style="display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Try it on an example page</h1>
+        <p style="margin: 0; font-size: 17px; color: #55576A">Each one is a checkout page I built to show a common setup mistake, or none. They aren't real stores. Pick one and watch the check catch it.</p>
+      </div>
+      <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px">
+        <div id="partners" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px"><p style="margin:0;color:#55576A">Loading examples...</p></div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px">
+          <button id="run" class="btn" type="button" disabled>Pick an example first</button>
+          <span style="font-size: 14px; color: #55576A">Takes about 30 seconds.</span>
+        </div>
+      </div>
+      <details id="own" class="card" style="padding: 20px 24px">
+        <summary>Have a real partner's page? Paste its link</summary>
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px">
+          <p style="margin: 0; font-size: 14px; color: #55576A">Use the confirmation page from a test order, at a public address.</p>
+          <div><label class="f" for="curl">Page link</label><input id="curl" type="url" placeholder="https://"></div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+            <div><label class="f" for="cname">Partner name</label><input id="cname" type="text" placeholder="Partner"></div>
+            <div><label class="f" for="cpid">Their partner ID</label><input id="cpid" type="text" placeholder="ptx-0000"></div>
+          </div>
+          <div><button id="runurl" class="btn" type="button">Check this page</button></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 2. checking -->
+    <section id="checking" class="hidden" style="display: flex; flex-direction: column; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h1 id="ctitle" style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Checking</h1>
+        <p style="margin: 0; font-size: 17px; color: #55576A">The AI agent is working through their order page. This takes about 30 seconds.</p>
+      </div>
+      <div class="card" style="padding: 8px 28px"><ol id="steps" style="list-style: none; margin: 0; padding: 0"></ol></div>
+    </section>
+
+    <!-- 3. result -->
+    <section id="result" class="hidden" style="display: flex; flex-direction: column; gap: 28px" aria-live="polite">
+      <div id="verdict" style="border-radius: 16px; padding: 30px 32px; display: flex; gap: 18px; align-items: flex-start"></div>
+      <div id="fixes" style="display: flex; flex-direction: column; gap: 14px"></div>
+      <div id="msgbox" class="card hidden" style="padding: 26px 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+          <h2 id="msgtitle" style="margin: 0; font-size: 20px">Message for their developer</h2>
+          <button id="copy" type="button" class="btn btn-ghost">Copy message</button>
+        </div>
+        <div id="msg" style="background: #EFF1FA; border-radius: 12px; padding: 18px 20px; font-size: 15px; line-height: 1.65; white-space: pre-line"></div>
+      </div>
+      <div id="next" class="card hidden" style="padding: 26px 28px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 20px">Next steps</h2>
+        <ul id="nextlist" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 16px"></ul>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px">
+        <button id="again" class="btn" type="button">Check another partner</button>
+        <a id="openpage" href="#" target="_blank" rel="noopener" style="font-size: 15px">Open the page that was checked</a>
+      </div>
+      <p id="who" style="margin: 0; font-size: 13px; color: #55576A"></p>
+      <details class="card" style="padding: 18px 22px">
+        <summary>For developers: see how the check worked</summary>
+        <div id="tech" style="margin-top: 14px; display: flex; flex-direction: column; gap: 12px; font-size: 14px"></div>
+      </details>
+    </section>
+
+    <!-- error -->
+    <section id="error" class="hidden card" style="padding: 26px 28px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 22px">That page couldn't be checked</h2>
+      <p id="errtext" style="margin: 0; color: #55576A"></p>
+      <div><button id="again2" class="btn" type="button">Try again</button></div>
+    </section>
+  </main>
+
+
+  <footer style="max-width: 960px; margin: 0 auto; padding: 0 24px 40px; font-size: 13px; color: #55576A">Built by Shivani Jagannatham as sample work for the Software Engineer (AI Agents) role.</footer>
+</div>
+<script src="config.js"></script>
+<script src="check.js"></script>
+</body>
+</html>
