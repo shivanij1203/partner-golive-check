@@ -13,11 +13,9 @@
     check: { title: "Next: keep live partners working", text: "Once a partner is live, the same agent keeps rechecking their page and flags anything that breaks.",
              href: "health.html", button: "See partner health", alt: { href: "check.html", label: "Or check another page" } },
     health: { title: "Next: see how well it works", text: "It was tested on pages where every problem was already known.",
-              href: "works.html", button: "Does it work?", alt: { href: "engineers.html", label: "Or see how it's built" } },
-    works: { title: "Next: see how it's built", text: "For engineers: how the agent and the code split the work, and how quality is tracked.",
-             href: "engineers.html", button: "For engineers", alt: { href: "index.html", label: "Or go back to the start" } },
-    engineers: { title: "That's the whole tour", text: "Want to try it again, or check one more page?",
-                 href: "check.html", button: "Check a partner", alt: { href: "index.html", label: "Or go back to the start" } }
+              href: "works.html", button: "Does it work?", alt: { href: "check.html", label: "Or check another page" } },
+    works: { title: "That's the whole tour", text: "Want to try it again, or check one more page?",
+             href: "check.html", button: "Check a partner", alt: { href: "index.html", label: "Or go back to the start" } }
   };
 
   // Journey bar
