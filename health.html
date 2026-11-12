@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Partner health | Partner go-live check</title>
+<meta name="description" content="Check a new partner's order confirmation page before offers go live. A concept for Fluent's partner team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #0B0B3D; background: #EFF1FA; min-height: 100vh">
+  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner onboarding. Not affiliated with Fluent. The example pages are made up.</div>
+  <header style="background: #FFFFFF; border-bottom: 1px solid #DCDFEA">
+    <div style="max-width: 960px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+      <a href="index.html" style="font-weight: 800; font-size: 16px; color: #0B0B3D; text-decoration: none">Partner go-live check</a>
+      <nav style="display: flex; flex-wrap: wrap; gap: 22px; font-size: 14px">
+        <a href="index.html" style="color: #55576A; font-weight: 500; text-decoration: none">How it works</a>
+        <a href="check.html" style="color: #55576A; font-weight: 500; text-decoration: none">Check a partner</a>
+        <a href="health.html" style="color: #0B0B3D; font-weight: 600; text-decoration: none" aria-current="page">Partner health</a>
+        <a href="works.html" style="color: #55576A; font-weight: 500; text-decoration: none">Does it work?</a>
+        <a href="engineers.html" style="color: #55576A; font-weight: 500; text-decoration: none">For engineers</a>
+      </nav>
+    </div>
+  </header>  <main style="max-width: 960px; margin: 0 auto; padding: 56px 24px 56px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Keep live partners working</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 720px">Partners change their sites without telling anyone. A redesign or a new cookie banner can quietly stop offers from showing, and the partner only notices when their earnings drop. The AI agent rechecks every live partner's page every few hours and tells the partner team the moment one breaks, with the fix.</p>
+    </div>
+
+    <section style="background: #EEF9AF; border-radius: 16px; padding: 22px 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px; max-width: 600px">
+        <b style="font-size: 17px">Try it</b>
+        <span style="font-size: 15px; line-height: 1.5">Pretend one of these partners just updated their site. The monitor rechecks that partner right away instead of waiting for the next round.</span>
+      </div>
+      <button id="simulate" class="btn" type="button">Simulate a site update</button>
+    </section>
+    <p id="busy" class="hidden" style="margin: -12px 0 0; font-size: 15px; color: #55576A" aria-live="polite">Rechecking the page...</p>
+
+    <section style="display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-size: 22px">Live partners</h2>
+      <div id="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 14px"><p style="margin:0;color:#55576A">Loading...</p></div>
+      <p style="margin: 0; font-size: 13px; color: #55576A">These partners are examples. Each one passed its go-live check before launch.</p>
+    </section>
+
+    <section class="card" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-size: 20px">Alerts sent to the partner team</h2>
+      <ul id="alerts" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px"></ul>
+    </section>
+  </main>
+  <footer style="max-width: 960px; margin: 0 auto; padding: 0 24px 40px; font-size: 13px; color: #55576A">Built by Shivani Jagannatham as sample work for the Software Engineer (AI Agents) role.</footer>
+</div>
+<script src="config.js"></script>
+<script src="health.js"></script>
+</body>
+</html>
