@@ -41,7 +41,7 @@
       notes[p.slug] = p.developer_note || "";
       html += '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">' +
         '<button type="button" class="btn btn-ghost" data-copy="' + esc(p.slug) + '">Copy message for their developer</button>' +
-        '<button type="button" class="btn btn-ghost" data-fix="' + esc(p.slug) + '">The partner fixed it</button></div>';
+        '<button type="button" class="btn btn-ghost" data-fix="' + esc(p.slug) + '">Pretend the partner fixed it</button></div>';
     } else {
       html += '<p style="margin:0;font-size:14px;color:#55576A">Offers are showing and sales are credited to the right account.</p>';
     }
@@ -78,9 +78,14 @@
     });
   }
 
+  var tries = 0;
   function load() {
-    return fetch(API + "/api/monitor").then(function (r) { return r.json(); }).then(render)
-      .catch(function () { $("cards").innerHTML = '<p style="margin:0;color:#55576A">The checker is waking up. Refresh in a minute.</p>'; });
+    return fetch(API + "/api/monitor").then(function (r) { return r.json(); }).then(function (st) { tries = 0; render(st); })
+      .catch(function () {
+        tries += 1;
+        $("cards").innerHTML = '<p style="margin:0;color:#55576A">' + (tries < 15 ? "Starting up the checker. This takes a few seconds." : "The checker isn't responding right now. Please try again in a few minutes.") + "</p>";
+        if (tries < 15) setTimeout(load, 4000);
+      });
   }
 
   var last = {};

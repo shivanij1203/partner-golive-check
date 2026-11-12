@@ -1,4 +1,4 @@
-// Home page motion: reveal on scroll, the email scrambling, and the "How it works" player.
+// Home page motion: reveal on scroll, the permission card, and the "How it works" player.
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -13,37 +13,18 @@
     Array.prototype.forEach.call(items, function (el) { el.classList.add("seen"); });
   }
 
-  // The email turns from plain text into a scrambled hash, then back.
+  // The shopper's permission: missing, then sent, then missing again.
   var pill = document.getElementById("emailpill"), label = document.getElementById("emaillabel");
-  var plain = "shopper@example.com", hashed = "9f2c4e81a7d3b065...";
-  var hex = "0123456789abcdef";
-  function scramble(done) {
-    var n = 0;
-    var t = setInterval(function () {
-      n++;
-      var out = "";
-      for (var i = 0; i < hashed.length; i++) {
-        out += i < n ? hashed[i] : hex[Math.floor(Math.random() * 16)];
-      }
-      pill.textContent = out;
-      if (n >= hashed.length) { clearInterval(t); done(); }
-    }, 45);
-  }
-  function setPlain() {
-    pill.textContent = plain;
-    pill.className = "pill bad"; label.className = "plabel bad";
-    label.textContent = "Plain text: anyone can read it";
-  }
   function cycle() {
-    setPlain();
+    pill.textContent = "consent: (not sent)";
+    pill.className = "pill bad"; label.className = "plabel bad";
+    label.textContent = "No record the shopper agreed";
     setTimeout(function () {
-      label.textContent = "Scrambling...";
-      scramble(function () {
-        pill.className = "pill good"; label.className = "plabel good";
-        label.textContent = "Scrambled: safe to share";
-        setTimeout(cycle, 2600);
-      });
-    }, 2200);
+      pill.textContent = "consent: true";
+      pill.className = "pill good"; label.className = "plabel good";
+      label.textContent = "Permission sent with the order";
+      setTimeout(cycle, 2600);
+    }, 2600);
   }
   if (pill && !reduce) cycle();
 

@@ -31,13 +31,14 @@
       .replace("Found the offer tag", "Found the offer code");
   }
 
+  var tries = 0;
   function loadPartners() {
     fetch(API + "/api/partners").then(function (r) { return r.json(); }).then(function (d) {
       var order = ["example-01", "example-04", "example-02", "example-11", "example-10", "example-13"];
       state.partners = d.partners.filter(function (p) { return p.featured; })
         .sort(function (a, b) { return order.indexOf(a.slug) - order.indexOf(b.slug); });
       $("partners").innerHTML = state.partners.map(function (p, i) {
-        var pass = /should pass/i.test(p.hint);
+        var pass = /should pass/i.test(p.hint);   // only the clean page's note says this
         return '<button type="button" class="pcard" aria-pressed="false" data-i="' + i + '">' +
           '<em class="tag ' + (pass ? "ok" : "bad") + '">' + (pass ? "No mistakes" : "Has a mistake") + "</em>" +
           "<b>" + esc(p.about) + "</b><span>" + esc(p.hint) + "</span></button>";
@@ -47,7 +48,10 @@
       });
       pick(1);   // start with "Pays the wrong account" chosen, so the button is ready
     }).catch(function () {
-      $("partners").innerHTML = '<p style="margin:0">The checker is waking up. Refresh in a minute.</p>';
+      tries += 1;
+      $("partners").innerHTML = tries < 15 ? '<p style="margin:0;color:#55576A">Starting up the checker. This takes a few seconds.</p>'
+                                           : '<p style="margin:0">The checker isn\'t responding right now. Please try again in a few minutes.</p>';
+      if (tries < 15) setTimeout(loadPartners, 4000);
     });
   }
 
@@ -60,11 +64,14 @@
     $("run").textContent = "Check this page";
   }
 
+  var SAMPLE_STORE = "https://shivanij1203.github.io/partner-golive-check/sample-store/";
   function start(body, name, page) {
     state.last = { body: body, name: name, page: page };
+    state.practice = !!body.partner || (body.url || "").indexOf(SAMPLE_STORE) === 0;
     state.name = name;
     state.page = page;
     $("ctitle").textContent = /^Example store/.test(name) ? "Checking the page" : "Checking " + name;
+    $("formerr").classList.add("hidden");
     $("steps").innerHTML = '<li class="step">' + ICON.spin + "<span>Starting</span></li>";
     show("checking");
     fetch(API + "/api/check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
@@ -133,21 +140,37 @@
     // The next actions, in order, so nobody has to work out what to do with the result.
     var steps = go ? [
       { t: "Confirm the launch date with the partner.", s: "Everything on the page checks out." },
-      { t: "Turn on monitoring so you hear if it breaks later.", s: "Partners change their sites; the agent rechecks every few hours.",
+      { t: "Add them to partner health after launch.", s: "Partners change their sites. The agent keeps an eye on the page so you hear if an update breaks it.",
         a: '<a class="btn btn-ghost" href="health.html">See partner health</a>' }
     ] : [
-      { t: "Copy the message for the partner's developer.", s: "It says what to change, in their terms.",
+      { t: "Copy the message for the partner's developer.", s: "It says what to change, in their terms. You can read it below.",
         a: '<button type="button" class="btn btn-ghost" data-act="copy">Copy message</button>' },
       { t: "Send it to the partner.", s: "Email or Slack, whatever you already use with them." },
       { t: "Check again when they say it's fixed.", s: "Same page, one click.",
         a: '<button type="button" class="btn btn-ghost" data-act="again">Check this page again</button>' }
     ];
+    if (state.practice) {
+      steps = go ? [
+        { t: "See what was checked.", s: "Every step is listed under the result, in plain words." },
+        { t: "Try a page with a problem.", s: "See what the partner team gets when something is wrong.",
+          a: '<button type="button" class="btn btn-ghost" data-act="new">Check another page</button>' }
+      ] : [
+        { t: "Read what's wrong, below.", s: "Each problem says what breaks and why it matters." },
+        { t: "See the message the partner's developer would get.", s: "It names the exact change to make.",
+          a: '<button type="button" class="btn btn-ghost" data-act="copy">Copy message</button>' },
+        { t: "Try another page.", s: "Each practice page has a different mistake.",
+          a: '<button type="button" class="btn btn-ghost" data-act="new">Check another page</button>' }
+      ];
+      $("practice").textContent = "This is a practice page, so nobody will fix it. With a real partner, you'd send them the message and check again once they say it's fixed.";
+    }
+    $("practice").classList.toggle("hidden", !state.practice);
     $("todolist").innerHTML = steps.map(function (x, i) {
       return '<li><span class="tnum">' + (i + 1) + '</span><span class="ttext"><b>' + esc(x.t) + "</b><small>" + esc(x.s) + "</small></span>" + (x.a || "") + "</li>";
     }).join("");
     Array.prototype.forEach.call($("todolist").querySelectorAll("[data-act]"), function (b) {
       b.addEventListener("click", function () {
         if (b.getAttribute("data-act") === "copy") { $("copy").click(); b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy message"; }, 1500); }
+        else if (b.getAttribute("data-act") === "new") { reset(); }
         else if (state.last) { start(state.last.body, state.last.name, state.last.page); }
       });
     });
@@ -156,9 +179,10 @@
       return '<li style="display:flex;gap:12px;align-items:center"><input type="checkbox" id="n' + i + '" style="width:20px;height:20px;accent-color:#007F67"><label for="n' + i + '">' + esc(c) + "</label></li>";
     }).join("");
 
-    $("openpage").href = state.page;
-    var by = r.mode === "agent" ? "Checked by the AI agent. The code, not the agent, decides what counts as a problem and whether the partner can launch."
-                                 : "Checked by the simple rules.";
+    $("openpage").href = state.page || "#";
+    $("openpage").classList.toggle("hidden", !state.page);
+    var by = r.mode === "agent" ? "Checked by the AI agent. The AI reads the page; fixed rules, not the AI, decide what counts as a problem and whether the partner can launch."
+                                 : "Checked by fixed rules, without the AI agent.";
     if (r.notes && r.notes.length) by += " " + r.notes.join(" ");
     $("who").textContent = by;
 
@@ -185,16 +209,32 @@
     if (!state.pick) return;
     start({ partner: state.pick.slug, mode: "agent" }, state.pick.name, API + "/partners/" + state.pick.slug + "/confirmation");
   });
+  function formError(text, field) {
+    $("formerr").textContent = text;
+    $("formerr").classList.remove("hidden");
+    if (field) $(field).focus();
+  }
+  ["curl", "chtml", "cpid"].forEach(function (id) {
+    $(id).addEventListener("input", function () { $("formerr").classList.add("hidden"); });
+  });
   $("runurl").addEventListener("click", function () {
-    var url = $("curl").value.trim(), pid = $("cpid").value.trim(), name = $("cname").value.trim() || "This partner";
-    if (!/^https?:\/\//.test(url) || !pid) { $("curl").focus(); return; }
-    start({ url: url, partner_id: pid, partner_name: name, mode: "agent" }, name, url);
+    var url = $("curl").value.trim(), code = $("chtml").value.trim(), pid = $("cpid").value.trim(),
+        name = $("cname").value.trim() || "This partner";
+    if (!url && !code) return formError("Add the page link, or paste the page's code.", "curl");
+    if (url && !/^https?:\/\//i.test(url)) { url = "https://" + url; $("curl").value = url; }
+    if (url && !/^https?:\/\/[^\s\/]+\.[^\s]+/i.test(url)) return formError("That doesn't look like a web address. It should look like https://store.com/order/confirmed", "curl");
+    if (!pid) return formError("Add their partner ID. It's how the check knows sales go to the right account. Any ID works for a test.", "cpid");
+    $("formerr").classList.add("hidden");
+    if (code && !url) start({ html: code, partner_id: pid, partner_name: name, mode: "agent" }, name, "");
+    else start({ url: url, partner_id: pid, partner_name: name, mode: "agent" }, name, url);
   });
   Array.prototype.forEach.call(document.querySelectorAll("[data-sample]"), function (b) {
     b.addEventListener("click", function () {
       $("curl").value = "https://shivanij1203.github.io/partner-golive-check/sample-store/" + b.getAttribute("data-sample") + ".html";
       $("cname").value = "Sample store";
       $("cpid").value = "ptx-2048";
+      $("chtml").value = "";
+      $("formerr").classList.add("hidden");
       $("runurl").focus();
     });
   });

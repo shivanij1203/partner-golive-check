@@ -28,13 +28,13 @@
   </header>  <main style="max-width: 1440px; margin: 0 auto; padding: 56px clamp(20px, 4vw, 64px) 56px; display: flex; flex-direction: column; gap: 28px">
     <div style="display: flex; flex-direction: column; gap: 10px">
       <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Keep live partners working</h1>
-      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 720px">Partners change their sites without telling anyone. A redesign or a new cookie banner can quietly stop offers from showing, and the partner only notices when their earnings drop. The AI agent rechecks every live partner's page every few hours and tells the partner team the moment one breaks, with the fix.</p>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 720px">Partners change their sites without telling anyone. A redesign or a new cookie banner can quietly break offers. When offers stop showing, your own numbers drop and show it. Other breaks don't show up as a drop: offers keep showing, but sales go to a test account or the shopper's permission stops being sent. The AI agent rechecks every live partner's page every few hours, catches both kinds, and tells the partner team what changed and how to fix it.</p>
     </div>
 
     <section style="background: #EEF9AF; border-radius: 16px; padding: 22px 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
       <div style="display: flex; flex-direction: column; gap: 4px; max-width: 600px">
         <b style="font-size: 17px">Try it</b>
-        <span style="font-size: 15px; line-height: 1.5">Pretend one of these partners just updated their site. The monitor rechecks that partner right away instead of waiting for the next round.</span>
+        <span style="font-size: 15px; line-height: 1.5">Pretend a partner just updated their site. The demo picks one partner at random, changes their page the way a real update might, and rechecks it right away instead of waiting for the next round.</span>
       </div>
       <button id="simulate" class="btn" type="button">Simulate a site update</button>
     </section>
@@ -44,11 +44,12 @@
     <section style="display: flex; flex-direction: column; gap: 14px">
       <h2 style="margin: 0; font-size: 22px">Live partners</h2>
       <div id="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px"><p style="margin:0;color:#55576A">Loading...</p></div>
-      <p style="margin: 0; font-size: 13px; color: #55576A">These partners are examples. Each one passed its go-live check before launch.</p>
+      <p style="margin: 0; font-size: 13px; color: #55576A">These partners are made up. Each one passed its go-live check before launch.</p>
     </section>
 
     <section class="card" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 14px">
-      <h2 style="margin: 0; font-size: 20px">Alerts sent to the partner team</h2>
+      <h2 style="margin: 0; font-size: 20px">Alerts the partner team would get</h2>
+      <p style="margin: -6px 0 0; font-size: 14px; color: #55576A">In a real setup these would go to the team's Slack or email. Here they're only shown on this page.</p>
       <ul id="alerts" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px"></ul>
     </section>
   </main>

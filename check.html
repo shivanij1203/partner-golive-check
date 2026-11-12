@@ -31,6 +31,7 @@
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Watch it check a page</h1>
         <p style="margin: 0; font-size: 17px; color: #55576A">I built a few practice checkout pages. One is set up right. The others have common setup mistakes. Choose one, press the button, and the AI agent checks it the way a person would.</p>
+        <p style="margin: 0; font-size: 15px; color: #55576A">Since I built these pages, I knew the answers in advance. To see it on a page I didn't build, use the option under the list.</p>
       </div>
       <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px">
         <h2 style="margin: 0; font-size: 18px">1. Choose a practice page</h2>
@@ -42,19 +43,28 @@
         </div>
       </div>
       <details id="own" class="card" style="padding: 20px 24px">
-        <summary>Or check a real partner's page by its link</summary>
-        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px">
-          <p style="margin: 0; font-size: 14px; color: #55576A">Use the confirmation page from a test order, at a public address.</p>
+        <summary>Or check a page I didn't build: a real partner's page or the sample store</summary>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px">
+          <p style="margin: 0; font-size: 15px; color: #55576A">An order confirmation page (the "thanks for your order" page) only appears after a purchase, so there are two ways in: its link, if it stays open to anyone, or its code, copied from your browser.</p>
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-            <span style="font-size: 14px; color: #55576A">No link handy? Try a sample store on its own site:</span>
+            <span style="font-size: 14px; color: #55576A">No page handy? Try a sample store that lives on its own site:</span>
             <button type="button" class="btn btn-ghost" data-sample="needs-a-fix">Store with a problem</button>
             <button type="button" class="btn btn-ghost" data-sample="ready">Store that is ready</button>
           </div>
           <div><label class="f" for="curl">Page link</label><input id="curl" type="url" placeholder="https://"></div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+          <details>
+            <summary>Or paste the page's code instead</summary>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px">
+              <p style="margin: 0; font-size: 14px; color: #55576A">Place a test order and open the confirmation page in Chrome. Right-click the page, choose Inspect, then right-click the top &lt;html&gt; line and choose Copy, then Copy element. Paste it here. This includes code a tag manager added after the page opened.</p>
+              <textarea id="chtml" rows="6" placeholder="&lt;html&gt;..." style="width: 100%; font: 13px/1.5 ui-monospace, Menlo, monospace; padding: 12px 14px; border: 1px solid #DCDFEA; border-radius: 10px; color: #0B0B3D; resize: vertical"></textarea>
+            </div>
+          </details>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
             <div><label class="f" for="cname">Partner name</label><input id="cname" type="text" placeholder="Partner"></div>
-            <div><label class="f" for="cpid">Their partner ID</label><input id="cpid" type="text" placeholder="ptx-0000"></div>
+            <div><label class="f" for="cpid">Their partner ID</label><input id="cpid" type="text" placeholder="ptx-0000">
+              <small style="display: block; margin-top: 6px; font-size: 13px; color: #55576A">The ID this partner was given at signup. The check makes sure sales are credited to it.</small></div>
           </div>
+          <p id="formerr" class="hidden" role="alert" style="margin: 0; font-size: 15px; color: #A3134F; font-weight: 600"></p>
           <div><button id="runurl" class="btn" type="button">Check this page</button></div>
         </div>
       </details>
@@ -64,7 +74,7 @@
     <section id="checking" class="hidden" style="display: flex; flex-direction: column; gap: 24px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h1 id="ctitle" style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Checking</h1>
-        <p style="margin: 0; font-size: 17px; color: #55576A">The AI agent is working through their order page. This usually takes under a minute.</p>
+        <p style="margin: 0; font-size: 17px; color: #55576A">The AI agent is working through the order page. This usually takes under a minute.</p>
       </div>
       <div class="card" style="padding: 8px 28px"><ol id="steps" style="list-style: none; margin: 0; padding: 0"></ol></div>
     </section>
@@ -74,6 +84,7 @@
       <div id="verdict" style="border-radius: 16px; padding: 30px 32px; display: flex; gap: 18px; align-items: flex-start"></div>
       <div id="todo" class="card" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 14px; border: 2px solid #292EB1">
         <h2 style="margin: 0; font-size: 20px">What to do now</h2>
+        <p id="practice" class="hidden" style="margin: 0; font-size: 15px; color: #55576A"></p>
         <ol id="todolist" class="todo"></ol>
       </div>
       <div id="fixes" style="display: flex; flex-direction: column; gap: 14px"></div>
@@ -103,6 +114,7 @@
     <section id="error" class="hidden card" style="padding: 26px 28px; display: flex; flex-direction: column; gap: 12px">
       <h2 style="margin: 0; font-size: 22px">That page couldn't be checked</h2>
       <p id="errtext" style="margin: 0; color: #55576A"></p>
+      <p style="margin: 0; font-size: 14px; color: #55576A">Nothing was graded, because the checker never saw the real page.</p>
       <div><button id="again2" class="btn" type="button">Try again</button></div>
     </section>
   </main>

@@ -35,7 +35,7 @@
       '<div style="display:flex;flex-direction:column;gap:4px"><h3 style="margin:0;font-size:20px">' + title + "</h3>" +
       '<p style="margin:0;font-size:15px;color:#55576A">' + sub + "</p></div>" +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">' +
-      box("Simple rules", rules) + box("AI agent", agent) + "</div></div>";
+      box("Fixed rules alone", rules) + box("AI agent", agent) + "</div></div>";
   }
 
   function cell(row) {
@@ -61,18 +61,19 @@
     };
     $("compare").innerHTML =
       group("Pages set up the standard way", "Set up the way the integration guide says", say(split(rules, true)), say(split(agent, true))) +
-      group("Pages set up their own way", "Set up the way real developers often do it", say(split(rules, false)), say(split(agent, false)));
+      group("Pages set up their own way", "Set up the way developers often do it instead", say(split(rules, false)), say(split(agent, false)));
 
     var byAgent = {};
     (agent ? agent.pages : []).forEach(function (p) { byAgent[p.slug] = p; });
-    $("pages").innerHTML = "<tr><th>Example page</th><th>Problems it should find</th><th>Simple rules</th><th>AI agent</th></tr>" +
+    $("pages").innerHTML = "<tr><th>Example page</th><th>Problems it should find</th><th>Fixed rules alone</th><th>AI agent</th></tr>" +
       rules.pages.map(function (p) {
         var exp = p.score.expected.map(function (c) { return esc(titles[c] || c); }).join("; ") || "None, it's set up right";
-        return "<tr><td><b>" + esc(about[p.slug] || p.name) + '</b><br><span style="color:#55576A">' + esc(p.name) + ", " + (p.setup === "documented" ? "standard setup" : "own setup") +
+        return "<tr><td><b>" + esc(about[p.slug] || p.name) + '</b><br><span style="color:#55576A">' + esc(p.name) + ", " + (p.setup === "documented" ? "set up the standard way" : "set up differently") +
           "</span></td><td>" + exp + "</td><td>" + cell(p) + "</td><td>" + cell(byAgent[p.slug]) + "</td></tr>";
       }).join("");
   }
 
+  var tries = 0;
   function load() {
     Promise.all([
       fetch(API + "/api/partners").then(function (r) { return r.json(); }),
@@ -82,7 +83,9 @@
       res[0].partners.forEach(function (p) { about[p.slug] = p.about; });
       render(res[1]);
     }).catch(function () {
-      $("compare").innerHTML = '<p style="margin:0;color:#55576A">The checker is waking up. Refresh in a minute.</p>';
+      tries += 1;
+      $("compare").innerHTML = '<p style="margin:0;color:#55576A">' + (tries < 15 ? "Starting up the checker. This takes a few seconds." : "The checker isn't responding right now. Please try again in a few minutes.") + "</p>";
+      if (tries < 15) setTimeout(load, 4000);
     });
   }
   load();
