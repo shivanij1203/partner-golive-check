@@ -33,14 +33,19 @@
 
   function loadPartners() {
     fetch(API + "/api/partners").then(function (r) { return r.json(); }).then(function (d) {
-      state.partners = d.partners.filter(function (p) { return p.featured; });
+      var order = ["example-01", "example-04", "example-02", "example-11", "example-10", "example-13"];
+      state.partners = d.partners.filter(function (p) { return p.featured; })
+        .sort(function (a, b) { return order.indexOf(a.slug) - order.indexOf(b.slug); });
       $("partners").innerHTML = state.partners.map(function (p, i) {
-        return '<button type="button" class="pcard" aria-pressed="false" data-i="' + i + '"><b>' + esc(p.about) +
-          "</b><span>" + esc(p.name) + "</span></button>";
+        var pass = /should pass/i.test(p.hint);
+        return '<button type="button" class="pcard" aria-pressed="false" data-i="' + i + '">' +
+          '<em class="tag ' + (pass ? "ok" : "bad") + '">' + (pass ? "No mistakes" : "Has a mistake") + "</em>" +
+          "<b>" + esc(p.about) + "</b><span>" + esc(p.hint) + "</span></button>";
       }).join("");
       Array.prototype.forEach.call(document.querySelectorAll(".pcard"), function (b) {
         b.addEventListener("click", function () { pick(+b.getAttribute("data-i")); });
       });
+      pick(1);   // start with "Pays the wrong account" chosen, so the button is ready
     }).catch(function () {
       $("partners").innerHTML = '<p style="margin:0">The checker is waking up. Refresh in a minute.</p>';
     });
@@ -58,7 +63,7 @@
   function start(body, name, page) {
     state.name = name;
     state.page = page;
-    $("ctitle").textContent = "Checking " + name;
+    $("ctitle").textContent = /^Example store/.test(name) ? "Checking the page" : "Checking " + name;
     $("steps").innerHTML = '<li class="step">' + ICON.spin + "<span>Starting</span></li>";
     show("checking");
     fetch(API + "/api/check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
@@ -95,6 +100,7 @@
   }
 
   function renderResult(r) {
+    var who = /^Example store/.test(r.partner) ? "This page" : r.partner;
     var blockers = r.findings.filter(function (f) { return f.severity === "blocker"; });
     var warnings = r.findings.filter(function (f) { return f.severity !== "blocker"; });
     var go = r.verdict === "go";
@@ -109,7 +115,7 @@
       sub = blockers.length + (blockers.length === 1 ? " thing needs" : " things need") + " fixing before offers can go live.";
     }
     v.innerHTML = (go ? ICON.big_ok : ICON.big_x) + '<div style="display:flex;flex-direction:column;gap:6px">' +
-      '<h1 style="margin:0;font-size:32px;letter-spacing:-0.02em">' + esc(r.partner) + (go ? " is ready to go live" : " is not ready yet") + "</h1>" +
+      '<h1 style="margin:0;font-size:32px;letter-spacing:-0.02em">' + esc(who) + (go ? " is ready to go live" : " is not ready yet") + "</h1>" +
       '<p style="margin:0;font-size:18px">' + esc(sub) + "</p></div>";
 
     var fx = "";
@@ -119,7 +125,8 @@
     $("fixes").classList.toggle("hidden", !fx);
 
     $("msgbox").classList.toggle("hidden", !r.findings.length);
-    $("msgtitle").textContent = "Message for " + r.partner + (/s$/i.test(r.partner) ? "'" : "'s") + " developer";
+    $("msgtitle").textContent = who === "This page" ? "Message for the partner's developer"
+                                                   : "Message for " + who + (/s$/i.test(who) ? "'" : "'s") + " developer";
     $("msg").textContent = r.developer_note;
 
     $("next").classList.toggle("hidden", !go);
@@ -128,10 +135,10 @@
     }).join("");
 
     $("openpage").href = state.page;
-    var who = r.mode === "agent" ? "Checked by the AI agent. The code, not the agent, decides what counts as a problem and whether the partner can launch."
+    var by = r.mode === "agent" ? "Checked by the AI agent. The code, not the agent, decides what counts as a problem and whether the partner can launch."
                                  : "Checked by the simple rules.";
-    if (r.notes && r.notes.length) who += " " + r.notes.join(" ");
-    $("who").textContent = who;
+    if (r.notes && r.notes.length) by += " " + r.notes.join(" ");
+    $("who").textContent = by;
 
     $("tech").innerHTML =
       "<div><b>Steps</b><ol style=\"margin:6px 0 0;padding-left:20px\">" + r.steps.map(function (s) {

@@ -107,3 +107,10 @@ th{font-size:12px;color:#55576A;font-weight:600}
   .coin{display:none}
   .sticks li{opacity:1 !important;animation:none !important}
 }
+
+.pcard{gap:6px !important}
+.pcard .tag{align-self:flex-start;font-style:normal;font-size:12px;font-weight:700;border-radius:999px;padding:3px 9px}
+.pcard .tag.ok{background:#EEF9AF;color:#007F67}
+.pcard .tag.bad{background:#FFEAF1;color:#A3134F}
+.pcard b{font-size:16px !important;line-height:1.35}
+.pcard span{font-size:14px !important;line-height:1.45}

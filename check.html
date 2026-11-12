@@ -26,18 +26,20 @@
     <!-- 1. pick -->
     <section id="pick" style="display: flex; flex-direction: column; gap: 24px">
       <div style="display: flex; flex-direction: column; gap: 10px">
-        <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Try it on an example page</h1>
-        <p style="margin: 0; font-size: 17px; color: #55576A">Each one is a checkout page I built to show a common setup mistake, or none. They aren't real stores. Pick one and watch the check catch it.</p>
+        <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Watch it check a page</h1>
+        <p style="margin: 0; font-size: 17px; color: #55576A">I built six practice checkout pages. One is set up right. The others each have a common mistake. Choose one, press the button, and the AI agent checks it the way a person would.</p>
       </div>
       <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px">
+        <h2 style="margin: 0; font-size: 18px">1. Choose a practice page</h2>
         <div id="partners" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px"><p style="margin:0;color:#55576A">Loading examples...</p></div>
+        <h2 style="margin: 4px 0 0; font-size: 18px">2. Run the check</h2>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px">
-          <button id="run" class="btn" type="button" disabled>Pick an example first</button>
+          <button id="run" class="btn" type="button" disabled>Choose a page above</button>
           <span style="font-size: 14px; color: #55576A">Takes about 30 seconds.</span>
         </div>
       </div>
       <details id="own" class="card" style="padding: 20px 24px">
-        <summary>Have a real partner's page? Paste its link</summary>
+        <summary>Or check a real partner's page by its link</summary>
         <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px">
           <p style="margin: 0; font-size: 14px; color: #55576A">Use the confirmation page from a test order, at a public address.</p>
           <div><label class="f" for="curl">Page link</label><input id="curl" type="url" placeholder="https://"></div>
