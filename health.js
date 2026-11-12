@@ -28,7 +28,7 @@
 
   function card(p) {
     var broken = p.status === "broken";
-    var html = '<div class="card" style="padding:20px 22px;display:flex;flex-direction:column;gap:10px;' +
+    var html = '<div class="card" id="card-' + esc(p.slug) + '" style="padding:20px 22px;display:flex;flex-direction:column;gap:10px;' +
       (broken ? "border-color:#F7B5CC;" : "") + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px">' +
       '<div><b style="font-size:17px">' + esc(p.name) + '</b><div style="font-size:13px;color:#55576A">' + esc(p.vertical) + "</div></div>" +
@@ -51,6 +51,7 @@
   }
 
   function render(st) {
+    st.partners.forEach(function (p) { last[p.slug] = p; });
     $("cards").innerHTML = st.partners.map(card).join("");
     var items = [];
     st.incidents.forEach(function (i) {
@@ -82,11 +83,33 @@
       .catch(function () { $("cards").innerHTML = '<p style="margin:0;color:#55576A">The checker is waking up. Refresh in a minute.</p>'; });
   }
 
+  var last = {};
+  function notice(res) {
+    var n = $("notice"), p = last[res.slug] || {}, name = p.name || "The partner";
+    var broke = res.status === "broken";
+    n.style.background = broke ? "#FFEAF1" : "#EEF9AF";
+    n.style.border = broke ? "1px solid #F7B5CC" : "0";
+    var what = broke ? (res.site_update || "") + " " + ((p.problems || [])[0] ? "The check found: " + p.problems[0].title.toLowerCase() + "." : "")
+                     : "The check passed again and the alert was closed.";
+    n.innerHTML = '<div><b style="font-size:17px">' + esc(name) + (broke ? " just broke" : " is working again") + "</b>" +
+      '<div style="font-size:15px;margin-top:2px">' + esc(what) + "</div></div>" +
+      '<a class="btn btn-ghost" href="#card-' + esc(res.slug) + '">' + (broke ? "See what to do" : "See the partner") + "</a>";
+    n.classList.remove("hidden");
+    var card = document.getElementById("card-" + res.slug);
+    if (card) {
+      card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
   function act(path, body) {
     $("busy").classList.remove("hidden");
     $("simulate").disabled = true;
+    var result;
     fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-      .then(function () { return load(); })
+      .then(function (r) { return r.json(); })
+      .then(function (res) { result = res; return load(); })
+      .then(function () { if (result && result.slug) notice(result); })
       .finally(function () { $("busy").classList.add("hidden"); $("simulate").disabled = false; });
   }
 

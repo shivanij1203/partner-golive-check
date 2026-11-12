@@ -61,6 +61,7 @@
   }
 
   function start(body, name, page) {
+    state.last = { body: body, name: name, page: page };
     state.name = name;
     state.page = page;
     $("ctitle").textContent = /^Example store/.test(name) ? "Checking the page" : "Checking " + name;
@@ -129,7 +130,28 @@
                                                    : "Message for " + who + (/s$/i.test(who) ? "'" : "'s") + " developer";
     $("msg").textContent = r.developer_note;
 
-    $("next").classList.toggle("hidden", !go);
+    // The next actions, in order, so nobody has to work out what to do with the result.
+    var steps = go ? [
+      { t: "Confirm the launch date with the partner.", s: "Everything on the page checks out." },
+      { t: "Turn on monitoring so you hear if it breaks later.", s: "Partners change their sites; the agent rechecks every few hours.",
+        a: '<a class="btn btn-ghost" href="health.html">See partner health</a>' }
+    ] : [
+      { t: "Copy the message for the partner's developer.", s: "It says what to change, in their terms.",
+        a: '<button type="button" class="btn btn-ghost" data-act="copy">Copy message</button>' },
+      { t: "Send it to the partner.", s: "Email or Slack, whatever you already use with them." },
+      { t: "Check again when they say it's fixed.", s: "Same page, one click.",
+        a: '<button type="button" class="btn btn-ghost" data-act="again">Check this page again</button>' }
+    ];
+    $("todolist").innerHTML = steps.map(function (x, i) {
+      return '<li><span class="tnum">' + (i + 1) + '</span><span class="ttext"><b>' + esc(x.t) + "</b><small>" + esc(x.s) + "</small></span>" + (x.a || "") + "</li>";
+    }).join("");
+    Array.prototype.forEach.call($("todolist").querySelectorAll("[data-act]"), function (b) {
+      b.addEventListener("click", function () {
+        if (b.getAttribute("data-act") === "copy") { $("copy").click(); b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy message"; }, 1500); }
+        else if (state.last) { start(state.last.body, state.last.name, state.last.page); }
+      });
+    });
+    $("next").classList.add("hidden");          // "What to do now" covers it
     $("nextlist").innerHTML = (r.checklist || []).map(function (c, i) {
       return '<li style="display:flex;gap:12px;align-items:center"><input type="checkbox" id="n' + i + '" style="width:20px;height:20px;accent-color:#007F67"><label for="n' + i + '">' + esc(c) + "</label></li>";
     }).join("");

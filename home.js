@@ -47,25 +47,42 @@
   }
   if (pill && !reduce) cycle();
 
-  // "How it works": steps play in turn; click one to jump to it.
+  // "How it works": steps play in turn, slowly enough to read. Hovering or focusing pauses it;
+  // the arrows step through by hand; the button pauses and resumes.
   var steps = document.querySelectorAll(".hstep"), scenes = document.querySelectorAll(".scene");
-  var how = document.querySelector(".how"), cur = 0, timer = null;
+  var how = document.querySelector(".how"), cur = 0, timer = null, userPaused = reduce, hovering = false;
+  var playBtn = document.getElementById("hplay");
   function go(i) {
-    cur = i;
-    Array.prototype.forEach.call(steps, function (s, k) { s.classList.toggle("on", k === i); s.setAttribute("aria-pressed", String(k === i)); });
+    cur = (i + steps.length) % steps.length;
+    Array.prototype.forEach.call(steps, function (s, k) { s.classList.toggle("on", k === cur); s.setAttribute("aria-pressed", String(k === cur)); });
     Array.prototype.forEach.call(scenes, function (s, k) {
-      s.classList.toggle("on", k === i);
-      if (k === i) { var c = s.cloneNode(true); s.parentNode.replaceChild(c, s); }   // restart its animations
+      s.classList.toggle("on", k === cur);
+      if (k === cur) { var c = s.cloneNode(true); s.parentNode.replaceChild(c, s); }   // restart its animations
     });
     scenes = document.querySelectorAll(".scene");
+    // restart the progress bar
+    var bar = steps[cur].querySelector(".prog");
+    if (bar) { bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = ""; }
   }
-  function play() {
+  function sync() {
+    var paused = userPaused || hovering;
+    how.classList.toggle("paused", paused);
+    if (playBtn) { playBtn.textContent = userPaused ? "Play" : "Pause"; playBtn.setAttribute("aria-label", userPaused ? "Play" : "Pause"); }
     clearInterval(timer);
-    if (reduce) { how.classList.add("paused"); return; }
-    timer = setInterval(function () { go((cur + 1) % steps.length); }, 4000);
+    if (!paused) timer = setInterval(function () { go(cur + 1); }, 7000);
   }
-  Array.prototype.forEach.call(steps, function (s) {
-    s.addEventListener("click", function () { go(+s.getAttribute("data-step")); play(); });
-  });
-  if (steps.length) { go(0); play(); }
+  if (how) {
+    if (reduce) how.classList.add("still");
+    Array.prototype.forEach.call(steps, function (s) {
+      s.addEventListener("click", function () { go(+s.getAttribute("data-step")); sync(); });
+    });
+    how.addEventListener("mouseenter", function () { hovering = true; sync(); });
+    how.addEventListener("mouseleave", function () { hovering = false; sync(); });
+    how.addEventListener("focusin", function () { hovering = true; sync(); });
+    how.addEventListener("focusout", function () { hovering = false; sync(); });
+    document.getElementById("hprev").addEventListener("click", function () { go(cur - 1); sync(); });
+    document.getElementById("hnext").addEventListener("click", function () { go(cur + 1); sync(); });
+    playBtn.addEventListener("click", function () { userPaused = !userPaused; sync(); });
+    go(0); sync();
+  }
 })();

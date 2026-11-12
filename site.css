@@ -14,7 +14,17 @@ a{color:#292EB1}a:hover{color:#191371}
 @keyframes gl-in4{0%,46%{opacity:0;transform:translateY(8px)}50%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
 @keyframes gl-in5{0%,60%{opacity:0;transform:translateY(8px)}64%,90%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
 
-@media (prefers-reduced-motion: reduce){.gl-anim{animation:none !important;opacity:1 !important;transform:none !important}}
+@keyframes gl-out1{0%,10%{opacity:1}14%,90%{opacity:0}97%,100%{opacity:1}}
+@keyframes gl-txt1{0%,10%{color:#9A9CAA}14%,90%{color:#0B0B3D}97%,100%{color:#9A9CAA}}
+@keyframes gl-out2{0%,22%{opacity:1}26%,90%{opacity:0}97%,100%{opacity:1}}
+@keyframes gl-txt2{0%,22%{color:#9A9CAA}26%,90%{color:#0B0B3D}97%,100%{color:#9A9CAA}}
+@keyframes gl-out3{0%,34%{opacity:1}38%,90%{opacity:0}97%,100%{opacity:1}}
+@keyframes gl-txt3{0%,34%{color:#9A9CAA}38%,90%{color:#0B0B3D}97%,100%{color:#9A9CAA}}
+@keyframes gl-out4{0%,46%{opacity:1}50%,90%{opacity:0}97%,100%{opacity:1}}
+@keyframes gl-txt4{0%,46%{color:#9A9CAA}50%,90%{color:#0B0B3D}97%,100%{color:#9A9CAA}}
+@keyframes gl-out5{0%,60%{opacity:1}64%,90%{opacity:0}97%,100%{opacity:1}}
+@keyframes gl-txt5{0%,60%{color:#9A9CAA}64%,90%{color:#0B0B3D}97%,100%{color:#9A9CAA}}
+@media (prefers-reduced-motion: reduce){.gl-anim{animation:none !important;opacity:1 !important;transform:none !important;color:inherit !important}.gl-wait{display:none !important}}
 
 
 *{box-sizing:border-box}
@@ -77,8 +87,9 @@ th{font-size:12px;color:#55576A;font-weight:600}
 .hstep.on{border-color:#292EB1;background:#F7F8FD}
 .hstep.on .num{background:#292EB1;color:#FFFFFF}
 .hstep .prog{position:absolute;left:0;bottom:0;height:3px;width:0;background:#292EB1}
-.hstep.on .prog{animation:prog 4s linear forwards}
-.paused .hstep.on .prog{animation:none;width:100%}
+.hstep.on .prog{animation:prog 7s linear forwards}
+.paused .hstep.on .prog{animation-play-state:paused}
+.still .hstep.on .prog{animation:none;width:100%}
 @keyframes prog{to{width:100%}}
 .screen{position:relative;flex:1 1 360px;min-height:260px;border-radius:16px;background:linear-gradient(135deg,#292EB1,#191371 60%,#0B0B3D);padding:24px;overflow:hidden}
 .scene{position:absolute;inset:24px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
@@ -141,3 +152,38 @@ th{font-size:12px;color:#55576A;font-weight:600}
   nav[aria-label="Main"] > a:nth-of-type(-n+3), nav[aria-label="Main"] > span{display:none}
   .journey-in{padding:10px 16px}
 }
+
+/* ---------- hero flow diagram ---------- */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:14px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px 20px}
+.fnode{flex:1 1 200px;display:flex;align-items:center;gap:12px;color:#FFFFFF}
+.fnode b{display:block;font-size:15px}
+.fnode span{display:block;font-size:13px;color:#C9CCEE;line-height:1.4}
+.fico{flex:none;width:46px;height:46px;border-radius:12px;background:rgba(238,249,175,.12);display:flex;align-items:center;justify-content:center}
+.flink{flex:1 1 120px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:110px}
+.flabel{font-size:12px;font-weight:600;color:#EEF9AF;text-align:center}
+.ftrack{position:relative;display:block;width:100%;height:2px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px)}
+.ftrack i{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:#B3E42E;box-shadow:0 0 10px 2px rgba(179,228,46,.6);animation:fdot 2.6s ease-in-out infinite}
+.flink:nth-of-type(4) .ftrack i{animation-delay:1.3s}
+@keyframes fdot{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 10px);opacity:0}}
+.fnote{margin:10px 0 0;font-size:13px;color:#C9CCEE;text-align:center}
+.aico{width:40px;height:40px;border-radius:10px;background:#EFF1FA;display:flex;align-items:center;justify-content:center}
+@media (max-width:700px){.flink{flex-basis:100%}.ftrack{width:2px;height:28px;background:repeating-linear-gradient(180deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px)}.ftrack i{left:-4px !important;top:0;animation-name:fdotv}}
+@keyframes fdotv{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 10px);opacity:0}}
+@media (prefers-reduced-motion: reduce){.ftrack i{animation:none;left:calc(50% - 5px)}}
+
+.hctl{display:flex;gap:8px;align-items:center;margin-top:4px}
+.hbtn{font:inherit;font-weight:600;font-size:14px;min-width:44px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #DCDFEA;background:#FFFFFF;color:#292EB1;cursor:pointer}
+.hbtn:hover{background:#EFF1FA}
+.hbtn:focus-visible{outline:3px solid #3793FF;outline-offset:2px}
+
+.todo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.todo li{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px}
+.todo .tnum{flex:none;width:32px;height:32px;border-radius:50%;background:#292EB1;color:#FFFFFF;font-weight:700;display:flex;align-items:center;justify-content:center}
+.todo .ttext{flex:1 1 260px;display:flex;flex-direction:column}
+.todo .ttext b{font-size:16px}
+.todo .ttext small{font-size:14px;color:#55576A}
+
+.flash{animation:flash 2.2s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(41,46,177,.55)}30%{box-shadow:0 0 0 8px rgba(41,46,177,.25)}100%{box-shadow:0 0 0 0 rgba(41,46,177,0)}}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){.flash{animation:none;outline:3px solid #292EB1}html{scroll-behavior:auto}}
