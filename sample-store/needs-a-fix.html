@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order confirmed | Sample store</title>
+<style>
+body{font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0;background:#f6f6f4;color:#1d1d1b}
+.bar{background:#fff;border-bottom:1px solid #e6e4df;padding:14px 24px;font-weight:700}
+.note{background:#fff7d6;border-bottom:1px solid #eadb9a;padding:8px 24px;font-size:13px}
+main{max-width:640px;margin:32px auto;padding:0 20px}
+.box{background:#fff;border:1px solid #e6e4df;border-radius:12px;padding:24px}
+table{width:100%;border-collapse:collapse;margin-top:12px}td{padding:6px 0;border-bottom:1px solid #f0eee9}td:last-child{text-align:right}
+</style></head><body>
+<div class="bar">Sample store</div>
+<div class="note">A sample store page for the go-live checker demo. It lives on its own site, the way a partner's page would.</div>
+<main><div class="box">
+<h1 style="margin-top:0">Thanks, your order is confirmed</h1>
+<p>Order 58213. A receipt is on its way to your email.</p>
+<table><tr><td>Running shoes</td><td>$89.00</td></tr><tr><td>Socks, 3 pack</td><td>$12.50</td></tr><tr><td><b>Total</b></td><td><b>$101.50</b></td></tr></table>
+</div>
+<div id="ptx-offers" style="margin-top:24px"></div>
+</main>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({"event": "purchase", "ecommerce": {"transaction_id": "58213", "value": 101.50, "currency": "USD"}, "user": {"email": "shopper@example.com"}});
+</script>
+<script>
+  // Map the purchase event into the offer tag's format
+  var dl = window.dataLayer.filter(function (e) { return e.event === 'purchase'; })[0];
+  window.ptxOrder = {
+    partner_id: 'ptx-2048',
+    order_id: dl.ecommerce.transaction_id,
+    order_total: dl.ecommerce.value,
+    currency: dl.ecommerce.currency,
+    email: dl.user.email,
+    consent: true
+  };
+</script>
+<script async src="https://cx3-router.onrender.com/tag/offers.js"></script>
+</body></html>

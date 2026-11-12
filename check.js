@@ -190,6 +190,14 @@
     if (!/^https?:\/\//.test(url) || !pid) { $("curl").focus(); return; }
     start({ url: url, partner_id: pid, partner_name: name, mode: "agent" }, name, url);
   });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-sample]"), function (b) {
+    b.addEventListener("click", function () {
+      $("curl").value = "https://shivanij1203.github.io/partner-golive-check/sample-store/" + b.getAttribute("data-sample") + ".html";
+      $("cname").value = "Sample store";
+      $("cpid").value = "ptx-2048";
+      $("runurl").focus();
+    });
+  });
   $("copy").addEventListener("click", function () {
     var t = $("msg").textContent;
     (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {

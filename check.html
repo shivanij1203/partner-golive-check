@@ -45,6 +45,11 @@
         <summary>Or check a real partner's page by its link</summary>
         <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px">
           <p style="margin: 0; font-size: 14px; color: #55576A">Use the confirmation page from a test order, at a public address.</p>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+            <span style="font-size: 14px; color: #55576A">No link handy? Try a sample store on its own site:</span>
+            <button type="button" class="btn btn-ghost" data-sample="needs-a-fix">Store with a problem</button>
+            <button type="button" class="btn btn-ghost" data-sample="ready">Store that is ready</button>
+          </div>
           <div><label class="f" for="curl">Page link</label><input id="curl" type="url" placeholder="https://"></div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
             <div><label class="f" for="cname">Partner name</label><input id="cname" type="text" placeholder="Partner"></div>
