@@ -1,4 +1,4 @@
-// Home page motion: reveal on scroll, the permission card, and the "How it works" player.
+// Home page motion: reveal on scroll and the "How it works" player.
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -13,20 +13,7 @@
     Array.prototype.forEach.call(items, function (el) { el.classList.add("seen"); });
   }
 
-  // The shopper's permission: missing, then sent, then missing again.
-  var pill = document.getElementById("emailpill"), label = document.getElementById("emaillabel");
-  function cycle() {
-    pill.textContent = "consent: (not sent)";
-    pill.className = "pill bad"; label.className = "plabel bad";
-    label.textContent = "No record the shopper agreed";
-    setTimeout(function () {
-      pill.textContent = "consent: true";
-      pill.className = "pill good"; label.className = "plabel good";
-      label.textContent = "Permission sent with the order";
-      setTimeout(cycle, 2600);
-    }, 2600);
-  }
-  if (pill && !reduce) cycle();
+  // The permission card stays in its broken state: it illustrates a problem.
 
   // The hero window is a picture of a check; clicking it goes to a real one.
   var win = document.querySelector(".hwin");

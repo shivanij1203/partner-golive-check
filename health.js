@@ -35,7 +35,8 @@
       pill(p.status) + "</div>";
     if (broken) {
       if (p.trigger) html += '<p style="margin:0;font-size:14px;color:#55576A"><b style="color:#0B0B3D">How it was found:</b> ' + esc(p.trigger) + "</p>";
-      if (p.site_update) html += '<p style="margin:0;font-size:14px;color:#55576A"><b style="color:#0B0B3D">Demo change applied:</b> ' + esc(p.site_update) + "</p>";
+      if ((p.what_changed || []).length) html += '<div style="font-size:15px"><b>What changed on the page</b>' +
+        p.what_changed.map(function (w) { return '<div style="color:#3E4052;margin-top:2px">' + esc(w) + "</div>"; }).join("") + "</div>";
       html += p.problems.map(function (x) {
         return '<p style="margin:0;font-size:15px"><b>' + esc(x.title) + '</b><br><span style="color:#55576A">' + esc(x.why) + "</span></p>";
       }).join("");
@@ -43,8 +44,10 @@
       html += '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">' +
         '<button type="button" class="btn btn-ghost" data-copy="' + esc(p.slug) + '">Copy message for their developer</button>' +
         '<button type="button" class="btn btn-ghost" data-fix="' + esc(p.slug) + '">Mark as fixed (demo)</button></div>';
+      if (p.site_update) html += '<details style="font-size:13px;color:#55576A"><summary>Answer key (demo)</summary>' +
+        '<div style="margin-top:4px">The demo applied this change: ' + esc(p.site_update) + "</div></details>";
     } else {
-      html += '<p style="margin:0;font-size:14px;color:#55576A">Offers are showing and sales are credited to the right account.</p>';
+      html += '<p style="margin:0;font-size:14px;color:#55576A">Page passed its last check.</p>';
     }
     html += '<span style="font-size:12px;color:#55576A">' + (p.last_checked ? "Checked " + ago(p.last_checked) : "Waiting for the first check") +
       (broken && p.since ? ", broken since " + ago(p.since) : "") + "</span></div>";
@@ -56,6 +59,7 @@
     $("cards").innerHTML = st.partners.map(card).join("");
     var items = [];
     st.incidents.forEach(function (i) {
+      if (i.opened_at < Date.now() / 1000 - 30 * 60) return;   // a break from someone else's visit
       if (i.closed_at) items.push({ t: i.closed_at, ok: true, text: i.name + " is working again." });
       items.push({ t: i.opened_at, ok: false, text: i.name + " broke: " + i.problems.join("; ") + "." + (i.trigger ? " " + i.trigger : "") });
     });
@@ -99,7 +103,7 @@
     n.style.border = broke ? "1px solid #F7B5CC" : "0";
     var lines = broke ? [
       ["How it was found", res.trigger || ""],
-      ["Demo change applied", res.site_update || ""],
+      ["What changed on the page", (res.what_changed || []).join(" ")],
       ["What the check found", (p.problems || [])[0] ? p.problems[0].title + "." : ""]
     ] : [["", "The check passed again and the alert was closed."]];
     n.innerHTML = '<div style="display:flex;flex-direction:column;gap:4px"><b style="font-size:17px">' + esc(name) + (broke ? " just broke" : " is working again") + "</b>" +

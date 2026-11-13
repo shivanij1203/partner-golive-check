@@ -40,7 +40,7 @@
       $("partners").innerHTML = state.partners.map(function (p, i) {
         var pass = /should pass/i.test(p.hint);   // only the clean page's note says this
         return '<button type="button" class="pcard" aria-pressed="false" data-i="' + i + '">' +
-          '<em class="tag ' + (pass ? "ok" : "bad") + '">' + (pass ? "No mistakes" : "Has a mistake") + "</em>" +
+          '<em class="tag ' + (pass ? "ok" : "bad") + '">' + (pass ? "Set up right" : "Not set up right") + "</em>" +
           "<b>" + esc(p.about) + "</b><span>" + esc(p.hint) + "</span></button>";
       }).join("");
       Array.prototype.forEach.call(document.querySelectorAll(".pcard"), function (b) {
@@ -121,7 +121,9 @@
       sub = warnings.length ? "It can launch. " + warnings.length + (warnings.length === 1 ? " small thing" : " small things") + " should be fixed soon."
                             : "Everything checks out.";
     } else {
-      sub = blockers.length + (blockers.length === 1 ? " thing needs" : " things need") + " fixing before offers can go live.";
+      var confirmOnly = blockers.every(function (f) { return f.code === "TAG_UNVERIFIED" || f.code === "ORDER_DATA_UNVERIFIED"; });
+      sub = blockers.length + (blockers.length === 1 ? " thing needs" : " things need") +
+            (confirmOnly ? " checking by a person before offers can go live." : " fixing before offers can go live.");
     }
     v.innerHTML = (go ? ICON.big_ok : ICON.big_x) + '<div style="display:flex;flex-direction:column;gap:6px">' +
       '<h1 style="margin:0;font-size:32px;letter-spacing:-0.02em">' + esc(who) + (go ? " is ready to go live" : " is not ready yet") + "</h1>" +
@@ -134,6 +136,15 @@
     $("fixes").classList.toggle("hidden", !fx);
 
     $("msgbox").classList.toggle("hidden", !r.findings.length);
+    var ungraded = r.graded === false;
+    if (ungraded) {
+      v.style.background = "#EFF1FA"; v.style.border = "1px solid #DCDFEA";
+      v.innerHTML = '<div style="display:flex;flex-direction:column;gap:6px">' +
+        '<h1 style="margin:0;font-size:32px;letter-spacing:-0.02em">This page can\'t be graded here</h1>' +
+        '<p style="margin:0;font-size:18px">' + esc(r.summary) + "</p></div>";
+      $("fixes").classList.add("hidden");
+      $("msgbox").classList.add("hidden");
+    }
     $("msgtitle").textContent = who === "This page" ? "Message for the partner's developer"
                                                    : "Message for " + who + (/s$/i.test(who) ? "'" : "'s") + " developer";
     $("msg").textContent = r.developer_note;
@@ -165,7 +176,15 @@
       $("practice").textContent = go ? "This is a practice page. With a real partner, you'd confirm the launch and keep an eye on them after."
                                      : "This is a practice page, so nobody will fix it. With a real partner, you'd send them the message and check again once they say it's fixed.";
     }
-    $("practice").classList.toggle("hidden", !state.practice);
+    if (ungraded) {
+      steps = [
+        { t: "Try a page built to the example spec.", s: "The sample store lives on its own site and is built to the spec.",
+          a: '<button type="button" class="btn btn-ghost" data-act="new">Back to the list</button>' },
+        { t: "For a real partner, load Fluent's own spec first.", s: "Then the same check grades their page." }
+      ];
+      $("practice").textContent = "The checker grades pages against this demo's example spec. This page uses a different setup, so there's nothing to grade. That isn't a sign the page is broken.";
+    }
+    $("practice").classList.toggle("hidden", !(state.practice || ungraded));
     $("again").textContent = state.practice ? "Back to the list" : "Check another partner";
     $("todolist").innerHTML = steps.map(function (x, i) {
       return '<li><span class="tnum">' + (i + 1) + '</span><span class="ttext"><b>' + esc(x.t) + "</b><small>" + esc(x.s) + "</small></span>" + (x.a || "") + "</li>";
@@ -226,7 +245,8 @@
     if (!url && !code) return formError("Add the page link, or paste the page's code.", "curl");
     if (url && !/^https?:\/\//i.test(url)) { url = "https://" + url; $("curl").value = url; }
     if (url && !/^https?:\/\/[^\s\/]+\.[^\s]+/i.test(url)) return formError("That doesn't look like a web address. It should look like https://store.com/order/confirmed", "curl");
-    if (!pid) return formError("Add their partner ID. It's how the check knows sales go to the right account. Any ID works for a test.", "cpid");
+    if (!pid) return formError("Add their partner ID: the one this partner was given at signup. It's how the check knows sales go to the right account.", "cpid");
+    if (url && code) return formError("Use either the link or the pasted code, not both. Clear one of them.", "curl");
     $("formerr").classList.add("hidden");
     if (code && !url) start({ html: code, partner_id: pid, partner_name: name, mode: "agent" }, name, "");
     else start({ url: url, partner_id: pid, partner_name: name, mode: "agent" }, name, url);
