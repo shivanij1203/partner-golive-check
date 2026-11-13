@@ -35,7 +35,7 @@
       '<div style="display:flex;flex-direction:column;gap:4px"><h3 style="margin:0;font-size:20px">' + title + "</h3>" +
       '<p style="margin:0;font-size:15px;color:#55576A">' + sub + "</p></div>" +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">' +
-      box("Fixed rules alone", rules) + box("AI agent", agent) + "</div></div>";
+      box("Fixed rules alone", rules) + (agent ? box("AI agent", agent) : "") + "</div></div>";
   }
 
   function cell(row) {
@@ -60,8 +60,9 @@
       return res ? res.pages.filter(function (p) { return (p.setup === "documented") === std; }) : null;
     };
     $("compare").innerHTML =
-      group("Pages set up the standard way", "Set up the way the integration guide says", say(split(rules, true)), say(split(agent, true))) +
-      group("Pages set up their own way", "Set up the way developers often do it instead", say(split(rules, false)), say(split(agent, false)));
+      group("Pages set up their own way", "Set up the way developers often do it instead. This is where the AI agent matters.", say(split(rules, false)), say(split(agent, false))) +
+      group("Pages set up the standard way", "Set up the way the integration guide says. Fixed rules handle these on their own.", say(split(rules, true)), say(split(agent, true))) +
+      (agent ? "" : '<p style="margin:0;font-size:14px;color:#55576A">The AI agent\'s results show here once its test has run on this server.</p>');
 
     var byAgent = {};
     (agent ? agent.pages : []).forEach(function (p) { byAgent[p.slug] = p; });

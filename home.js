@@ -28,6 +28,10 @@
   }
   if (pill && !reduce) cycle();
 
+  // The hero window is a picture of a check; clicking it goes to a real one.
+  var win = document.querySelector(".hwin");
+  if (win) win.addEventListener("click", function () { location.href = "check.html"; });
+
   // "How it works": steps play in turn, slowly enough to read. Hovering or focusing pauses it;
   // the arrows step through by hand; the button pauses and resumes.
   var steps = document.querySelectorAll(".hstep"), scenes = document.querySelectorAll(".scene");

@@ -34,7 +34,7 @@
   var tries = 0;
   function loadPartners() {
     fetch(API + "/api/partners").then(function (r) { return r.json(); }).then(function (d) {
-      var order = ["example-01", "example-04", "example-02", "example-11", "example-10", "example-13"];
+      var order = ["example-01", "example-04", "example-06", "example-11", "example-10", "example-13"];
       state.partners = d.partners.filter(function (p) { return p.featured; })
         .sort(function (a, b) { return order.indexOf(a.slug) - order.indexOf(b.slug); });
       $("partners").innerHTML = state.partners.map(function (p, i) {
@@ -46,7 +46,8 @@
       Array.prototype.forEach.call(document.querySelectorAll(".pcard"), function (b) {
         b.addEventListener("click", function () { pick(+b.getAttribute("data-i")); });
       });
-      pick(1);   // start with "Pays the wrong account" chosen, so the button is ready
+      var start = state.partners.map(function (p) { return p.slug; }).indexOf("example-04");
+      pick(start < 0 ? 0 : start);   // start with "Pays the wrong account" chosen, so the button is ready
     }).catch(function () {
       tries += 1;
       $("partners").innerHTML = tries < 15 ? '<p style="margin:0;color:#55576A">Starting up the checker. This takes a few seconds.</p>'
@@ -108,7 +109,7 @@
   }
 
   function renderResult(r) {
-    var who = /^Example store/.test(r.partner) ? "This page" : r.partner;
+    var who = /^Example store/.test(r.partner) || r.partner === "This partner" ? "This page" : r.partner;
     var blockers = r.findings.filter(function (f) { return f.severity === "blocker"; });
     var warnings = r.findings.filter(function (f) { return f.severity !== "blocker"; });
     var go = r.verdict === "go";
@@ -128,7 +129,7 @@
 
     var fx = "";
     if (blockers.length) fx += '<h2 style="margin:0;font-size:22px">What to fix</h2>' + fixList(blockers, 1);
-    if (warnings.length) fx += '<h2 style="margin:8px 0 0;font-size:22px">Can wait until after launch</h2>' + fixList(warnings, blockers.length + 1);
+    if (warnings.length) fx += '<h2 style="margin:8px 0 0;font-size:22px">Can wait until after launch</h2>' + fixList(warnings, 1);
     $("fixes").innerHTML = fx;
     $("fixes").classList.toggle("hidden", !fx);
 
@@ -151,7 +152,7 @@
     ];
     if (state.practice) {
       steps = go ? [
-        { t: "See what was checked.", s: "Every step is listed under the result, in plain words." },
+        { t: "That's what a ready page looks like.", s: "Nothing to fix, so there's no message for the developer." },
         { t: "Try a page with a problem.", s: "See what the partner team gets when something is wrong.",
           a: '<button type="button" class="btn btn-ghost" data-act="new">Check another page</button>' }
       ] : [
@@ -161,9 +162,11 @@
         { t: "Try another page.", s: "Each practice page has a different mistake.",
           a: '<button type="button" class="btn btn-ghost" data-act="new">Check another page</button>' }
       ];
-      $("practice").textContent = "This is a practice page, so nobody will fix it. With a real partner, you'd send them the message and check again once they say it's fixed.";
+      $("practice").textContent = go ? "This is a practice page. With a real partner, you'd confirm the launch and keep an eye on them after."
+                                     : "This is a practice page, so nobody will fix it. With a real partner, you'd send them the message and check again once they say it's fixed.";
     }
     $("practice").classList.toggle("hidden", !state.practice);
+    $("again").textContent = state.practice ? "Back to the list" : "Check another partner";
     $("todolist").innerHTML = steps.map(function (x, i) {
       return '<li><span class="tnum">' + (i + 1) + '</span><span class="ttext"><b>' + esc(x.t) + "</b><small>" + esc(x.s) + "</small></span>" + (x.a || "") + "</li>";
     }).join("");

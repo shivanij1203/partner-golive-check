@@ -13,7 +13,7 @@
 <body data-page="health">
 
 <div style="font-family: Inter, system-ui, sans-serif; color: #0B0B3D; background: #EFF1FA; min-height: 100vh">
-  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner onboarding. Not affiliated with Fluent. The example pages are made up.</div>
+  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner team. Not affiliated with Fluent. The example pages are made up.</div>
   <header style="background: #FFFFFF; border-bottom: 1px solid #DCDFEA">
     <div style="max-width: 1440px; margin: 0 auto; padding: 16px clamp(20px, 4vw, 64px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
       <a href="index.html" style="font-weight: 800; font-size: 16px; color: #0B0B3D; text-decoration: none">Partner go-live check</a>
@@ -28,15 +28,26 @@
   </header>  <main style="max-width: 1440px; margin: 0 auto; padding: 56px clamp(20px, 4vw, 64px) 56px; display: flex; flex-direction: column; gap: 28px">
     <div style="display: flex; flex-direction: column; gap: 10px">
       <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Keep live partners working</h1>
-      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 720px">Partners change their sites without telling anyone. A redesign or a new cookie banner can quietly break offers. When offers stop showing, your own numbers drop and show it. Other breaks don't show up as a drop: offers keep showing, but sales go to a test account or the shopper's permission stops being sent. The AI agent rechecks every live partner's page every few hours, catches both kinds, and tells the partner team what changed and how to fix it.</p>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 720px">Partners change their sites without telling anyone, and a redesign or a new cookie banner can quietly break offers. Your own data shows when something changes: offer views drop, or the order details the offer code sends start looking wrong. It doesn't show why. That signal starts a recheck of the partner right away, and the AI agent finds what changed on the page and writes the fix for their developer.</p>
     </div>
 
-    <section style="background: #EEF9AF; border-radius: 16px; padding: 22px 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-      <div style="display: flex; flex-direction: column; gap: 4px; max-width: 600px">
-        <b style="font-size: 17px">Try it</b>
-        <span style="font-size: 15px; line-height: 1.5">Pretend a partner just updated their site. The demo picks one partner at random, changes their page the way a real update might, and rechecks it right away instead of waiting for the next round.</span>
+    <section style="background: #EEF9AF; border-radius: 16px; padding: 22px 26px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <b style="font-size: 17px">Try it: send a signal</b>
+        <span style="font-size: 15px; line-height: 1.5">Each button breaks a random partner's page the way a real site update might, then sends the signal your data would show. The data is simulated here. Demo breaks undo themselves after half an hour.</span>
       </div>
-      <button id="simulate" class="btn" type="button">Simulate a site update</button>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px">
+        <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+          <b style="font-size: 16px">Offer views drop</b>
+          <span style="font-size: 14px; line-height: 1.5; color: #55576A">Offers stop showing, so views fall to zero. The agent finds out why.</span>
+          <button id="simulate" class="btn" type="button" data-kind="views_dropped" style="align-self: flex-start">Views dropped</button>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+          <b style="font-size: 16px">Order details look wrong</b>
+          <span style="font-size: 14px; line-height: 1.5; color: #55576A">Views look normal, but orders arrive without the shopper's permission, or with the same order number every time. The agent finds out why.</span>
+          <button id="simulate2" class="btn" type="button" data-kind="data_wrong" style="align-self: flex-start">Details look wrong</button>
+        </div>
+      </div>
     </section>
     <p id="busy" class="hidden" style="margin: -12px 0 0; font-size: 15px; color: #55576A" aria-live="polite">Rechecking the page...</p>
     <div id="notice" class="hidden" role="status" aria-live="polite" style="margin-top: -8px; border-radius: 14px; padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px"></div>
@@ -44,13 +55,22 @@
     <section style="display: flex; flex-direction: column; gap: 14px">
       <h2 style="margin: 0; font-size: 22px">Live partners</h2>
       <div id="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px"><p style="margin:0;color:#55576A">Loading...</p></div>
-      <p style="margin: 0; font-size: 13px; color: #55576A">These partners are made up. Each one passed its go-live check before launch.</p>
+      <p style="margin: 0; font-size: 13px; color: #55576A">These partners are made up. Each one passed its go-live check before launch. A recheck runs the fixed rules first, which cost nothing; the AI agent only steps in when there's a problem to explain, so a healthy partner never costs a model call.</p>
     </section>
 
     <section class="card" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 14px">
       <h2 style="margin: 0; font-size: 20px">Alerts the partner team would get</h2>
       <p style="margin: -6px 0 0; font-size: 14px; color: #55576A">In a real setup these would go to the team's Slack or email. Here they're only shown on this page.</p>
       <ul id="alerts" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px"></ul>
+    </section>
+
+    <section class="card" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-size: 20px">In a real setup</h2>
+      <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.6; color: #55576A">
+        <li>Your own alerting would send the signal when a partner's views drop or their order details look wrong. The checker has a hook for it.</li>
+        <li>A regular recheck of every live partner is the backstop, for low-traffic partners and for a page that changed before any shopper reached it.</li>
+        <li>The partner's page would come from a saved test order rather than a public link, and the checks would follow Fluent's own spec.</li>
+      </ul>
     </section>
   </main>
   <footer style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px) 40px; font-size: 13px; color: #55576A">Built by Shivani Jagannatham as sample work for the Software Engineer (AI Agents) role.</footer>

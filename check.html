@@ -13,7 +13,7 @@
 <body data-page="check">
 
 <div style="font-family: Inter, system-ui, sans-serif; color: #0B0B3D; background: #EFF1FA; min-height: 100vh">
-  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner onboarding. Not affiliated with Fluent. The example pages are made up.</div>
+  <div style="background: #0B0B3D; color: #FFFFFF; font-size: 13px; text-align: center; padding: 8px 16px">A concept I built for Fluent's partner team. Not affiliated with Fluent. The example pages are made up.</div>
   <header style="background: #FFFFFF; border-bottom: 1px solid #DCDFEA">
     <div style="max-width: 1440px; margin: 0 auto; padding: 16px clamp(20px, 4vw, 64px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
       <a href="index.html" style="font-weight: 800; font-size: 16px; color: #0B0B3D; text-decoration: none">Partner go-live check</a>
@@ -30,7 +30,7 @@
     <section id="pick" style="display: flex; flex-direction: column; gap: 24px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h1 style="margin: 0; font-size: 36px; letter-spacing: -0.02em">Watch it check a page</h1>
-        <p style="margin: 0; font-size: 17px; color: #55576A">I built a few practice checkout pages. One is set up right. The others have common setup mistakes. Choose one, press the button, and the AI agent checks it the way a person would.</p>
+        <p style="margin: 0; font-size: 17px; color: #55576A">I built a few practice order confirmation pages. One is set up right. The others have common setup mistakes. Choose one, press the button, and the AI agent checks it the way a person would.</p>
         <p style="margin: 0; font-size: 15px; color: #55576A">Since I built these pages, I knew the answers in advance. To see it on a page I didn't build, use the option under the list.</p>
       </div>
       <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px">
@@ -45,7 +45,7 @@
       <details id="own" class="card" style="padding: 20px 24px">
         <summary>Or check a page I didn't build: a real partner's page or the sample store</summary>
         <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px">
-          <p style="margin: 0; font-size: 15px; color: #55576A">An order confirmation page (the "thanks for your order" page) only appears after a purchase, so there are two ways in: its link, if it stays open to anyone, or its code, copied from your browser.</p>
+          <p style="margin: 0; font-size: 15px; color: #55576A">An order confirmation page (the "thanks for your order" page) only appears after a purchase, so there are two ways in: its link, if it stays open to anyone, or its code, copied from your browser. It checks against this demo's example spec, so a real Fluent partner's page would need Fluent's own spec loaded first.</p>
           <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
             <span style="font-size: 14px; color: #55576A">No page handy? Try a sample store that lives on its own site:</span>
             <button type="button" class="btn btn-ghost" data-sample="needs-a-fix">Store with a problem</button>
@@ -55,7 +55,7 @@
           <details>
             <summary>Or paste the page's code instead</summary>
             <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px">
-              <p style="margin: 0; font-size: 14px; color: #55576A">Place a test order and open the confirmation page in Chrome. Right-click the page, choose Inspect, then right-click the top &lt;html&gt; line and choose Copy, then Copy element. Paste it here. This includes code a tag manager added after the page opened.</p>
+              <p style="margin: 0; font-size: 14px; color: #55576A">Place a test order and open the confirmation page in Chrome. Right-click the page, choose Inspect, then right-click the top &lt;html&gt; line and choose Copy, then Copy element. Paste it here. This includes code a tag manager added after the page opened. Use a test order, not a real shopper's.</p>
               <textarea id="chtml" rows="6" placeholder="&lt;html&gt;..." style="width: 100%; font: 13px/1.5 ui-monospace, Menlo, monospace; padding: 12px 14px; border: 1px solid #DCDFEA; border-radius: 10px; color: #0B0B3D; resize: vertical"></textarea>
             </div>
           </details>

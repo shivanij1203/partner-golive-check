@@ -5,12 +5,13 @@
   var steps = [
     { key: "home", href: "index.html", label: "How it works" },
     { key: "check", href: "check.html", label: "Check a partner" },
-    { key: "health", href: "health.html", label: "Partner health" }
+    { key: "health", href: "health.html", label: "Partner health" },
+    { key: "works", href: "works.html", label: "Does it work?" }
   ];
   var NEXT = {
     home: { title: "Next: check a partner's page", text: "Pick a practice page and watch the AI agent check it.",
             href: "check.html", button: "Check a partner", alt: { href: "health.html", label: "Or jump to partner health" } },
-    check: { title: "Next: keep live partners working", text: "Once a partner is live, the same agent keeps rechecking their page and flags anything that breaks.",
+    check: { title: "Next: keep live partners working", text: "Once a partner is live, the same agent finds out why when your data shows something changed.",
              href: "health.html", button: "See partner health", alt: { href: "check.html", label: "Or check another page" } },
     health: { title: "Next: see how well it works", text: "It was tested on pages where every problem was already known.",
               href: "works.html", button: "Does it work?", alt: { href: "check.html", label: "Or check another page" } },

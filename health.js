@@ -34,14 +34,15 @@
       '<div><b style="font-size:17px">' + esc(p.name) + '</b><div style="font-size:13px;color:#55576A">' + esc(p.vertical) + "</div></div>" +
       pill(p.status) + "</div>";
     if (broken) {
-      if (p.site_update) html += '<p style="margin:0;font-size:14px;color:#55576A"><b style="color:#0B0B3D">What happened:</b> ' + esc(p.site_update) + "</p>";
+      if (p.trigger) html += '<p style="margin:0;font-size:14px;color:#55576A"><b style="color:#0B0B3D">How it was found:</b> ' + esc(p.trigger) + "</p>";
+      if (p.site_update) html += '<p style="margin:0;font-size:14px;color:#55576A"><b style="color:#0B0B3D">Demo change applied:</b> ' + esc(p.site_update) + "</p>";
       html += p.problems.map(function (x) {
         return '<p style="margin:0;font-size:15px"><b>' + esc(x.title) + '</b><br><span style="color:#55576A">' + esc(x.why) + "</span></p>";
       }).join("");
       notes[p.slug] = p.developer_note || "";
       html += '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">' +
         '<button type="button" class="btn btn-ghost" data-copy="' + esc(p.slug) + '">Copy message for their developer</button>' +
-        '<button type="button" class="btn btn-ghost" data-fix="' + esc(p.slug) + '">Pretend the partner fixed it</button></div>';
+        '<button type="button" class="btn btn-ghost" data-fix="' + esc(p.slug) + '">Mark as fixed (demo)</button></div>';
     } else {
       html += '<p style="margin:0;font-size:14px;color:#55576A">Offers are showing and sales are credited to the right account.</p>';
     }
@@ -56,10 +57,12 @@
     var items = [];
     st.incidents.forEach(function (i) {
       if (i.closed_at) items.push({ t: i.closed_at, ok: true, text: i.name + " is working again." });
-      items.push({ t: i.opened_at, ok: false, text: i.name + " broke: " + i.problems.join("; ") + "." });
+      items.push({ t: i.opened_at, ok: false, text: i.name + " broke: " + i.problems.join("; ") + "." + (i.trigger ? " " + i.trigger : "") });
     });
+    var since = Date.now() / 1000 - 30 * 60;           // older demo alerts are someone else's visit
+    items = items.filter(function (a) { return a.t > since; });
     items.sort(function (a, b) { return b.t - a.t; });
-    $("alerts").innerHTML = items.length ? items.slice(0, 8).map(function (a) {
+    $("alerts").innerHTML = items.length ? items.slice(0, 5).map(function (a) {
       return '<li style="display:flex;gap:12px;align-items:flex-start;background:#EFF1FA;border-radius:12px;padding:12px 14px">' +
         '<span aria-hidden="true" style="flex:none;width:10px;height:10px;margin-top:6px;border-radius:50%;background:' + (a.ok ? "#00B592" : "#EF2678") + '"></span>' +
         '<span style="font-size:15px">' + esc(a.text) + ' <span style="color:#55576A;font-size:13px">' + ago(a.t) + "</span></span></li>";
@@ -94,10 +97,15 @@
     var broke = res.status === "broken";
     n.style.background = broke ? "#FFEAF1" : "#EEF9AF";
     n.style.border = broke ? "1px solid #F7B5CC" : "0";
-    var what = broke ? (res.site_update || "") + " " + ((p.problems || [])[0] ? "The check found: " + p.problems[0].title.toLowerCase() + "." : "")
-                     : "The check passed again and the alert was closed.";
-    n.innerHTML = '<div><b style="font-size:17px">' + esc(name) + (broke ? " just broke" : " is working again") + "</b>" +
-      '<div style="font-size:15px;margin-top:2px">' + esc(what) + "</div></div>" +
+    var lines = broke ? [
+      ["How it was found", res.trigger || ""],
+      ["Demo change applied", res.site_update || ""],
+      ["What the check found", (p.problems || [])[0] ? p.problems[0].title + "." : ""]
+    ] : [["", "The check passed again and the alert was closed."]];
+    n.innerHTML = '<div style="display:flex;flex-direction:column;gap:4px"><b style="font-size:17px">' + esc(name) + (broke ? " just broke" : " is working again") + "</b>" +
+      lines.filter(function (l) { return l[1]; }).map(function (l) {
+        return '<div style="font-size:15px">' + (l[0] ? "<b>" + esc(l[0]) + ":</b> " : "") + esc(l[1]) + "</div>";
+      }).join("") + "</div>" +
       '<a class="btn btn-ghost" href="#card-' + esc(res.slug) + '">' + (broke ? "See what to do" : "See the partner") + "</a>";
     n.classList.remove("hidden");
     var card = document.getElementById("card-" + res.slug);
@@ -109,16 +117,18 @@
 
   function act(path, body) {
     $("busy").classList.remove("hidden");
-    $("simulate").disabled = true;
+    $("simulate").disabled = true; $("simulate2").disabled = true;
     var result;
     fetch(API + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
       .then(function (r) { return r.json(); })
       .then(function (res) { result = res; return load(); })
       .then(function () { if (result && result.slug) notice(result); })
-      .finally(function () { $("busy").classList.add("hidden"); $("simulate").disabled = false; });
+      .finally(function () { $("busy").classList.add("hidden"); $("simulate").disabled = false; $("simulate2").disabled = false; });
   }
 
-  $("simulate").addEventListener("click", function () { act("/api/monitor/simulate", {}); });
+  ["simulate", "simulate2"].forEach(function (id) {
+    $(id).addEventListener("click", function () { act("/api/monitor/simulate", { kind: $(id).getAttribute("data-kind") }); });
+  });
   load();
   setInterval(load, 30000);
 })();
