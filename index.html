@@ -84,21 +84,33 @@
   </section>
 
   <main style="max-width: 1440px; margin: 0 auto; padding: 64px clamp(20px, 4vw, 64px) 56px; display: flex; flex-direction: column; gap: 64px">
-    <section style="display: flex; flex-direction: column; gap: 20px">
+    <section style="display: flex; flex-direction: column; gap: 22px">
       <div class="reveal" style="display: flex; flex-direction: column; gap: 8px">
         <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #292EB1">About this project</p>
-        <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">What this is, why I built it, and how</h2>
+        <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">A working concept, built to try the job</h2>
+        <p class="vlead">I applied for Fluent&#39;s Software Engineer (AI Agents) role and built a tool for the partner team. It runs for real, on example pages I built and on any page you give it.</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
-        <div class="card reveal" style="padding:24px;display:flex;flex-direction:column;gap:10px"><div class="aico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><circle cx="12" cy="7.5" r=".6" fill="#292EB1"></circle></svg></div><h3 style="margin:0;font-size:19px">What this is</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#55576A">A working concept of a tool for Fluent&#39;s partner team. An AI agent checks a partner&#39;s order confirmation page before offers go live, then keeps watching it after launch. Everything on this site runs for real, on example pages I built and on any page you give it.</p></div>
-        <div class="card reveal" style="padding:24px;display:flex;flex-direction:column;gap:10px"><div class="aico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2-5.4 3.2 1.3-6L3.3 9.2l6.1-.6z"></path></svg></div><h3 style="margin:0;font-size:19px">Why I built it</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#55576A">I applied for Fluent&#39;s Software Engineer (AI Agents) role. Most of Fluent&#39;s growth now comes from commerce partners, and every new partner has to be set up correctly and kept that way. A setup mistake quietly costs the partner and Fluent money, so it felt like the right problem to try the job on.</p></div>
-        <div class="card reveal" style="padding:24px;display:flex;flex-direction:column;gap:10px"><div class="aico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M4 12h16M4 18h12"></path><circle cx="18" cy="6" r="2"></circle><circle cx="20" cy="18" r="2"></circle></svg></div><h3 style="margin:0;font-size:19px">How I approached it</h3><ol style="margin:0;padding-left:18px;font-size:15px;line-height:1.6;color:#55576A"><li>Read public guides on how post-purchase offers are set up, and wrote an example spec from them. A real version would use Fluent&#39;s own spec.</li><li>Listed the mistakes that fail quietly.</li><li>Built example pages with those mistakes.</li><li>Let the AI agent read the page, but kept the final call in code.</li><li>Tested it, including a page that tries to trick it.</li><li>Added monitoring for after launch.</li></ol></div>
+      <div class="card reveal" style="padding: 28px 24px 22px">
+        <div class="vtl" style="--n:5">
+          <div class="vtp"><div class="vd" style="background:#EFF1FA"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2"/><path d="M8 7h8"/></svg></div><b>Read public guides</b><span>How post-purchase offers are set up</span></div>
+          <div class="vtp"><div class="vd" style="background:#EFF1FA"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg></div><b>Wrote an example spec</b><span>A real version uses Fluent&#39;s own</span></div>
+          <div class="vtp"><div class="vd" style="background:#FFEAF1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4 19a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-10V3"/><path d="M7 15h10"/></svg></div><b>Built test pages</b><span>Each with a mistake that fails quietly</span></div>
+          <div class="vtp"><div class="vd" style="background:#EFF1FA"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0z"/><path d="m19 7-3 7a4 4 0 0 0 6 0z"/></svg></div><b>AI reads, rules decide</b><span>The final call stays in code</span></div>
+          <div class="vtp"><div class="vd" style="background:#EEF9AF"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><b>Tested, then watched</b><span>Including a page that tries to trick it</span></div>
+        </div>
       </div>
     </section>
 
     <section class="reveal" style="display: flex; flex-direction: column; gap: 20px">
       <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">The problem</h2>
-      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #55576A; max-width: 680px">When a partner adds offers to their checkout, small setup mistakes are easy to miss. Most of them fail quietly, so nobody notices until money is lost.</p>
+      <div class="card reveal" style="padding: 26px 24px 20px">
+        <div class="vtl" style="--n:4">
+          <div class="vtp"><div class="vd" style="background:#EFF1FA"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><b>Partner signs</b></div>
+          <div class="vtp"><div class="vd" style="background:#FFEAF1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></div><b>Setup mistakes</b><small>offers never show</small></div>
+          <div class="vtp"><div class="vd" style="background:#EEF9AF"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V4h11l-1 4h6v9H9l1-4H4"/></svg></div><b>Launch</b></div>
+          <div class="vtp"><div class="vd" style="background:#FFEAF1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><b>A site update breaks it</b><small>nobody says why</small></div>
+        </div>
+      </div>
       <div class="pgrid">
         <div class="pcardx reveal">
           <div class="viz" aria-hidden="true">
@@ -171,26 +183,58 @@
     <section class="reveal" style="display: flex; flex-direction: column; gap: 20px">
       <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">Where it fits</h2>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
-        <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-size: 19px">What it covers</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #55576A">Website partners who add the offer code to their own checkout. That&#39;s where setups vary most and mistakes hide. Fluent already receives the order details on a test order. This checks what that data can&#39;t show, like whether the offer spot is on the page and which server the code loads from, and turns each problem into the developer&#39;s fix. A real version would read the test-order data too.</p></div>
-        <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-size: 19px">What it leaves out</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #55576A">Shopify merchants who install through an app like Rebuy Monetize, partners using the app SDK, and in-store partners have their own setup paths, so I left them out.</p></div>
-        <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-size: 19px">Why an AI agent</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #55576A">Fixed rules handle pages set up the standard way, and they run first. Many partners set things up their own way, mapping order details through a data layer or their own scripts. That&#39;s where the agent earns its place: it reads the setup like an engineer would and writes the fix in the developer&#39;s terms. Fixed rules still make the final call, and anything it can&#39;t confirm, like code added by a tag manager, goes to a person.</p></div>
+        <div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+          <b style="font-size: 16px">Covers</b>
+          <div class="vchips"><span class="vchip">Website partners</span><span class="vchip">Custom setups</span><span class="vchip">Before and after launch</span></div>
+          <small style="font-size: 13px; color: #55576A; line-height: 1.5">Fluent already gets the order details on a test order. This checks what that data can&#39;t show: the offer spot, and where the code loads from.</small>
+        </div>
+        <div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+          <b style="font-size: 16px">Leaves out</b>
+          <div class="vchips"><span class="vchip no">Shopify app installs</span><span class="vchip no">App SDK partners</span><span class="vchip no">In-store</span></div>
+          <small style="font-size: 13px; color: #55576A; line-height: 1.5">They have their own setup paths.</small>
+        </div>
+        <div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+          <b style="font-size: 16px">Why an AI agent</b>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div class="vout" style="background:#EFF1FA"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0z"/><path d="m19 7-3 7a4 4 0 0 0 6 0z"/></svg> Rules handle standard setups</div>
+            <div class="vout" style="background:#EFF1FA"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6"/></svg> The agent reads custom ones</div>
+            <div class="vout" style="background:#EEF9AF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg> Unsure goes to a person</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="card reveal" style="padding: 32px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
-      <div style="display: flex; flex-direction: column; gap: 8px; max-width: 620px">
-        <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">After launch, it keeps watching</h2>
-        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #55576A">Partners update their sites all the time. Your own data shows when something changes: offer views drop, or orders start arriving without the shopper&#39;s permission. It doesn&#39;t show why. That signal starts a recheck of the partner right away, and the same AI agent finds what changed on the page and writes the fix for their developer. A regular recheck of every live partner is the backstop.</p>
+    <section class="card reveal" style="padding: 32px 32px 28px; display: flex; flex-direction: column; gap: 20px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">After launch, it keeps watching</h2>
+          <p style="margin: 0; font-size: 16px; color: #55576A">Your data shows that something changed. The agent finds out why.</p>
+        </div>
+        <a href="health.html" class="btn" style="color: #FFFFFF">See partner health</a>
       </div>
-      <a href="health.html" class="btn" style="color: #FFFFFF">See partner health</a>
+      <div class="vflow"><div class="vnode"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 9 4 4 3-3 5 6"/></svg></div><b>Fluent's data flags a change</b><small>Views drop, or order details look wrong</small></div><div class="varr" aria-hidden="true"><svg width="22" height="16" viewBox="0 0 22 16"><path d="M1 8h18M14 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="vnode"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><b>Recheck right away</b></div><div class="varr" aria-hidden="true"><svg width="22" height="16" viewBox="0 0 22 16"><path d="M1 8h18M14 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="vnode"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="8" height="16" rx="2"/><rect x="13" y="4" width="8" height="16" rx="2"/><path d="M6 9h2M16 9h2M16 13h2"/></svg></div><b>Compare to the last good check</b></div><div class="varr" aria-hidden="true"><svg width="22" height="16" viewBox="0 0 22 16"><path d="M1 8h18M14 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="vouts"><div class="vout" style="background:#FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#292EB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="8" height="16" rx="2"/><rect x="13" y="4" width="8" height="16" rx="2"/><path d="M6 9h2M16 9h2M16 13h2"/></svg> What changed on the page</div><div class="vout" style="background:#FFEAF1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3134F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> The fix for their developer</div></div></div>
     </section>
 
-    <section class="reveal" style="background: #EEF9AF; border-radius: 16px; padding: 32px 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
-      <div style="display: flex; flex-direction: column; gap: 6px; max-width: 620px">
-        <h2 style="margin: 0; font-size: 22px; color: #0B0B3D">Why it matters</h2>
-        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #0B0B3D">Every day between signing a partner and their first live order is a day of no revenue. Every day a live partner is quietly broken costs revenue per order and margin. If the partner has a guaranteed minimum, it means paying for traffic that earns nothing.</p>
+    <section class="reveal" style="display: flex; flex-direction: column; gap: 20px">
+      <h2 style="margin: 0; font-size: 28px; letter-spacing: -0.01em">Built to be trusted</h2>
+      <div class="vtiles">
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0z"/><path d="m19 7-3 7a4 4 0 0 0 6 0z"/></svg></div><div><b>Rules decide, not the AI</b><small>The agent reads and explains</small></div></div>
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><div><b>Unsure goes to a person</b><small>Never says ready when unsure</small></div></div>
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><div><b>Can&#39;t be talked into it</b><small>Notes that try to trick it are flagged</small></div></div>
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B0B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5"/></svg></div><div><b>Healthy partners cost no AI</b><small>Rules run first</small></div></div>
       </div>
-      <a href="check.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 30px; background: #292EB1; color: #FFFFFF; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none">Try an example</a>
+    </section>
+
+    <section class="reveal" style="background: #EEF9AF; border-radius: 16px; padding: 30px 32px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+        <h2 style="margin: 0; font-size: 24px; color: #0B0B3D">Why it matters</h2>
+        <a href="check.html" class="btn" style="color: #FFFFFF">Try an example</a>
+      </div>
+      <div class="vtiles">
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><b>Time to first revenue</b><small>Every day before launch earns nothing</small></div></div>
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><div><b>Revenue per order</b><small>A quietly broken page drags it down</small></div></div>
+        <div class="vtile"><div class="vi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#007F67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><div><b>Margin</b><small>A guaranteed minimum with no earnings</small></div></div>
+      </div>
     </section>
   </main>
 

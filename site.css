@@ -219,3 +219,30 @@ html{scroll-behavior:smooth}
 .hbad{background:#FFEAF1;color:#A3134F}
 @media (max-width:560px){.hpanel{border-left:0;border-top:1px solid #DCDFEA}}
 @media (prefers-reduced-motion: reduce){.hscan{display:none}}
+
+/* ---------- diagrams shared across pages: flows, timelines, icon tiles, chips ---------- */
+.vflow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.vnode{flex:1 1 140px;min-width:120px;background:#FFFFFF;border:1px solid #DCDFEA;border-radius:14px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.vnode .vi{width:46px;height:46px;border-radius:12px;background:#EFF1FA;display:flex;align-items:center;justify-content:center}
+.vnode b{font-size:14px;line-height:1.3}
+.vnode small{font-size:13px;color:#55576A;line-height:1.4}
+.varr{flex:none;display:flex;align-items:center;color:#9BA0D8}
+.vouts{flex:1 1 170px;display:flex;flex-direction:column;gap:8px;justify-content:center}
+.vout{border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.vtl{position:relative;display:grid;grid-template-columns:repeat(var(--n,4),1fr);gap:8px;padding-top:4px}
+.vtl::before{content:"";position:absolute;left:8%;right:8%;top:36px;height:4px;border-radius:2px;background:linear-gradient(90deg,#DCDFEA,#292EB1 50%,#DCDFEA)}
+.vtp{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.vtp .vd{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:4px solid #EFF1FA;box-shadow:0 0 0 1px #DCDFEA}
+.vtp b{font-size:14px;line-height:1.3}
+.vtp small{font-size:13px;font-weight:600;color:#A3134F}
+.vtp span{font-size:13px;color:#55576A;line-height:1.4;max-width:180px}
+.vtiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.vtile{background:#FFFFFF;border:1px solid #DCDFEA;border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px}
+.vtile .vi{width:44px;height:44px;border-radius:12px;background:#EEF9AF;display:flex;align-items:center;justify-content:center;flex:none}
+.vtile b{display:block;font-size:15px;line-height:1.3}
+.vtile small{display:block;margin-top:2px;font-size:13px;color:#55576A;line-height:1.4}
+.vchips{display:flex;flex-wrap:wrap;gap:8px}
+.vchip{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;background:#EFF1FA;color:#292EB1}
+.vchip.no{background:#F3F3F6;color:#55576A;text-decoration:line-through;text-decoration-color:#9BA0D8}
+.vlead{margin:0;font-size:18px;line-height:1.5;color:#55576A;max-width:760px}
+@media (max-width:720px){.varr{transform:rotate(90deg);width:100%;justify-content:center}.vnode,.vouts{flex-basis:100%}.vtl{grid-template-columns:repeat(2,1fr);row-gap:20px}.vtl::before{display:none}}
